@@ -1,0 +1,20 @@
+---
+
+- name: Update Apt Repositories
+  apt: update_cache=yes upgrade=yes
+  when: apt_update is defined
+
+- name: Install Base Packages
+  apt: name={{ item }} state=latest
+  with_items: _base.packages
+
+- name: Set Default Target to Multi-User
+  command: systemctl set-default multi-user.target
+
+- name: Set Timezone
+  copy: content='Europe/Berlin\n' dest=/etc/timezone owner=root group=root mode=0644 backup=no
+  notify: Restart NTP
+
+- name: Reconfigure tzdata
+  command: dpkg-reconfigure --frontend noninteractive tzdata
+

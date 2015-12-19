@@ -1,0 +1,6 @@
+auto lo
+iface lo inet loopback
+
+{% for if in _networking.interfaces %}
+{{ if.config }}
+{% endfor %}

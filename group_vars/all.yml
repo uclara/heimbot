@@ -1,5 +1,15 @@
 ---
 
+BASE:
+  packages:
+    - vim
+    - screen
+    - zsh
+    - curl
+    - ntp
+    - iproute2
+    - jq
+
 UNIX_USERS:
   - name: lukas
     groups:

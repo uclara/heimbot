@@ -1,0 +1,9 @@
+---
+- hosts: raspi
+  become: yes
+  vars_files:
+    - vars/secrets.yml
+  roles:
+    - { role: base, tags: [ 'base' ], _base: "{{ BASE }}" }
+    - { role: networking, tags: [ 'networking' ], _networking: "{{ NETWORKING }}" }
+

@@ -1,0 +1,9 @@
+{% for n in _networking.interfaces %}
+{% if n.wifi is defined %}
+network={
+  ssid="{{ n.wifi.ssid }}"
+  psk="{{ n.wifi.password }}"
+}
+{% endif %}
+{% endfor %}
+

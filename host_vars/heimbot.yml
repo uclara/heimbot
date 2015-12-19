@@ -1,0 +1,21 @@
+---
+
+NETWORKING:
+  use_wifi: Yes
+  interfaces:
+    - name: eth0
+      config: |+
+        auto eth0
+        iface eth0 inet dhcp
+    - name: wlan0
+      config: |+
+        allow-hotplug wlan0
+        iface wlan0 inet manual
+        wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+        iface default inet dhcp
+      wifi:
+        ssid: PDT-01
+        password: "{{ S_NETWORKING.wifi.pdt_01.password }}"
+      firmware:
+        package: firmware-ralink
+

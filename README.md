@@ -64,6 +64,14 @@
 
 ### 2.1. Bootstrap
 
-    `ansible-playbook -i hosts -u root -k bootstrap.yml`
+`ansible-playbook -i hosts -u root -k bootstrap.yml`
+
+### 2.2 Set Up Services
+
+`ansible-playbook -i hosts site.yml`
+
+The site playbook supports a few parameters which you can pass via `--extra-vars "parameter=value"`:
+
+* `apt_update=[True|False]` -- `base`: Updates Apt cache and runs an upgrade
 
 
