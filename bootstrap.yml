@@ -1,0 +1,37 @@
+# Bootstrap a fresh Respberry Pi
+---
+
+- hosts: heimbot
+  tasks:
+    - name: Set Hostname
+      copy: content={{ inventory_hostname }} dest=/etc/hostname
+      register: hostname
+
+    - name: Set Hostname
+      command: hostname -b -F /etc/hostname
+      when: hostname|changed
+
+    - name: Install Base Packages
+      apt: name={{ item }} state=present update_cache=yes cache_valid_time=3600
+      with_items:
+        - zsh
+        - sudo
+
+    - name: Set sudo to Allow Passwordless sudo for Admin Group members
+      lineinfile: "dest=/etc/sudoers state=present line='%adm ALL = NOPASSWD: ALL' insertafter='^%sudo(\\s+)ALL' validate='visudo -cf %s'"
+
+    - name: Create User
+      user: name={{ item.name }} groups={{ item.groups|join(',') }} shell={{ item.shell }}
+      with_items: UNIX_USERS
+
+    - name: Create SSH Subdirectories
+      file: path=/home/{{ item.name }}/.ssh state=directory owner={{ item.name }} group={{ item.name }} mode=0755
+      with_items: UNIX_USERS
+
+    - name: Copy SSH Public Keys
+      copy: content="{{ item.ssh.public_key }}" dest=/home/{{ item.name }}/.ssh/authorized_keys owner={{ item.name }} group={{ item.name }} mode=0600
+      with_items: UNIX_USERS
+
+    - name: Deactivate Root Login
+      user: name=root password="*"
+

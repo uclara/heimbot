@@ -1,0 +1,10 @@
+---
+
+UNIX_USERS:
+  - name: lukas
+    groups:
+      - adm
+    shell: /usr/bin/zsh
+    ssh:
+      public_key: ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAvC0DqZ0rHidjYvIxjICXNHSN5pt7k+Oh3tf8k3dTQMss97ti9MqEELiwQfGdWzxM+33k1jm1HzClKkpYYho9Qo8PKU+/mr3w+puVzmitEiTRbB/ACGuRDkhP2hMBI4aS5mteTY3zGVguac8CvymHYgirnYeWev5xpV8diTOQ89xfr/vT//RI0lXTkNpCoogcWDcD05E+MZun3vI4EFXVQhoUDZAh6W69XZ0pSw7SUh12zf/eNo8ZpKA8sNBoGivq9ivGPQy0ykTThCez+DAJl9gqh+8yeyd7EDyNzX7qdMQABEvLHkwt8I3YguLkUurbiBrMwPANJXD8MXuPL4JyVw==
+

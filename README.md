@@ -5,6 +5,8 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [1. Initial Manual Steps](#1-initial-manual-steps)
+- [2. Automatic Steps using Ansible](#2-automatic-steps-using-ansible)
+  - [2.1. Bootstrap](#21-bootstrap)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -53,4 +55,15 @@
     1. Reboot and SSH
 
     1. `resize2fs /dev/mmcblk0p2`
+
+1. Install Python
+
+
+## 2. Automatic Steps using Ansible
+
+
+### 2.1. Bootstrap
+
+    `ansible-playbook -i hosts -u root -k bootstrap.yml`
+
 
