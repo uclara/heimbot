@@ -1,0 +1,21 @@
+{
+    "bridge": {
+        "name": "Homebridge",
+        "username": "{{ _homebridge.security.username }}",
+        "port": 51826,
+        "pin": "{{ _homebridge.security.pin }}"
+    },
+
+    "platforms": [
+        {
+            "platform": "FHEM",
+            "name": "FHEM",
+            "server": "127.0.0.1",
+            "port": "8083",
+            "filter": "room=Homekit",
+            "auth": {"user": "{{ _homebridge.platforms.fhem.security.user }}", "pass": "{{ _homebridge.platforms.fhem.security.password }}"}
+        }
+     ],
+
+    "accessories": []
+}

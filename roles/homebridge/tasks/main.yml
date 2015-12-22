@@ -1,0 +1,64 @@
+---
+
+- name: Install gcc
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - build-essential
+    - libssl-dev
+
+- name: Install Avahi Developer Packages
+  apt: pkg=libavahi-compat-libdnssd-dev
+
+- name: Create Download Directory
+  file: name=/var/lib/downloads state=directory mode=0755 owner=root group=root
+
+- name: Download Node.js
+  get_url: url={{ _homebridge.nodejs.download_url }} dest="/var/lib/downloads/nodejs.tgz"
+  register: download
+
+- name: Create Unpack Directory
+  file: name=/opt/nodejs state=directory mode=0755 owner=root group=root
+
+- name: Unpack Download
+  unarchive: src="/var/lib/downloads/nodejs.tgz" dest=/opt/nodejs mode=0755 owner=root group=root copy=no
+  when: download|changed
+
+- name: Set Installed Node.js active alternative
+  command: update-alternatives --install "/usr/bin/{{ item }}" {{ item }} /opt/nodejs/{{ _homebridge.nodejs.version }}/bin/{{ item }} 1000
+  with_items:
+    - node
+    - npm
+
+- name: Install Homebridge
+  npm: global=yes name={{ item }} state=latest
+  with_items:
+    - homebridge
+    - homebridge-fhem
+
+- name: Install Homebridge Systemd Unit
+  copy: src="{{ item }}" dest="/{{ item }}" owner=root group=root mode=0644
+  with_items:
+    - etc/systemd/system/homebridge.service
+
+- name: Setup Homebridge Autostart
+  service: name=homebridge state=started enabled=yes
+
+- name: Set Installed Homebridge Active Alternative
+  command: update-alternatives --install "/usr/bin/{{ item }}" {{ item }} /opt/nodejs/{{ _homebridge.nodejs.version }}/bin/{{ item }} 1000
+  with_items:
+    - homebridge
+
+- name: Create Homebridge Group
+  group: name=homebridge system=yes
+
+- name: Create Homebridge User
+  user: name=homebridge createhome=yes system=yes group=homebridge
+
+- name: Create Homebridge config directory
+  file: name=/home/homebridge/.homebridge state=directory mode=0750 owner=homebridge group=homebridge
+
+- name: Create Homebridge Config
+  template: src=config.json.j2 dest=/home/homebridge/.homebridge/config.json owner=homebridge group=homebridge mode=0640
+  notify:
+    - Reload Homebridge
+
