@@ -6,4 +6,6 @@
   roles:
     - { role: base, tags: [ 'base' ], _base: "{{ BASE }}" }
     - { role: networking, tags: [ 'networking' ], _networking: "{{ NETWORKING }}" }
+    - { role: udev, tags: [ 'udev' ], _udev: "{{ UDEV }}" }
+
 

@@ -1,0 +1,5 @@
+---
+
+- name: Update udev
+  command: udevadm trigger --attr-match=vendor={{ item }}
+  with_items: _udev.vendors

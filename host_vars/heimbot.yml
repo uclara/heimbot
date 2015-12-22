@@ -1,5 +1,10 @@
 ---
 
+CUL:
+  symlinks:
+    433: CUL433
+    868: CUL868
+
 NETWORKING:
   use_wifi: Yes
   interfaces:
@@ -18,4 +23,14 @@ NETWORKING:
         password: "{{ S_NETWORKING.wifi.pdt_01.password }}"
       firmware:
         package: firmware-ralink
+
+
+UDEV:
+  rule_files:
+    - name: 99-busware.rules
+      rules:
+        - 'SUBSYSTEM=="tty", ATTRS{idProduct}=="204b", ATTRS{idVendor}=="03eb", ATTRS{product}=="CUL433", SYMLINK+="{{ CUL.symlinks.433 }}"'
+        - 'SUBSYSTEM=="tty", ATTRS{idProduct}=="204b", ATTRS{idVendor}=="03eb", ATTRS{product}=="CUL868", SYMLINK+="{{ CUL.symlinks.868 }}"'
+  vendors:
+    - 03eb
 

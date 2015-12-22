@@ -1,0 +1,6 @@
+---
+- name: Install udev rules
+  template: src=etc/udev/rules.d/rule_file.rules.j2 dest=/etc/udev/rules.d/{{ item.name }} owner=root group=root mode=0644
+  with_items: _udev.rule_files
+  notify: Update udev
+
