@@ -1,9 +1,16 @@
 ---
 
-- name: Add FHEM APT Repository
+- name: Install CUL Flash Support
+  apt: name={{ item }} state=latest force=yes
+  with_items:
+    - make
+    - dfu-programmer
+  when: _fhem.firware_flash_support
+
+- name: Add Fhem APT Repository
   apt_repository: repo="deb https://debian.fhem.de/stable ./" state=present update_cache=yes
 
-- name: Install FHEM
+- name: Install Fhem
   apt: name={{ item }} state=latest force=yes
   with_items:
     - make
@@ -11,9 +18,23 @@
     - fhem
   register: installation_changed
 
-- name: Install CUL Flash Support
-  apt: name={{ item }} state=latest force=yes
+- name: Stop Fhem after Installation
+  service: name=fhem state=stopped
+  when: installation_changed|changed or clean_fhem_saved_state is defined and clean_fhem_saved_state
+  notify:
+    - Restart Fhem
+
+- name: Remove Fhem Saved State
+  file: name=/opt/fhem/log/fhem.save state=absent
+  when: clean_fhem_saved_state is defined and clean_fhem_saved_state
+  notify:
+    - Restart Fhem
+
+- name: Generate Fhem Configuration
+  template: src='{{ item }}.j2' dest='/{{ item }}' owner=fhem group=dialout mode=0600
   with_items:
-    - make
-    - dfu-programmer
-  when: _fhem.firware_flash_support
+    - opt/fhem/fhem.cfg
+  notify:
+    - Restart Fhem
+
+

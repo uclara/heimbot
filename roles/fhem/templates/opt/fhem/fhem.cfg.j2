@@ -1,0 +1,80 @@
+# ========================
+# GLOBAL ATTRIBUTES
+# ========================
+attr global autoload_undefined_devices 0
+attr global logfile ./log/fhem-%Y-%m.log
+attr global modpath .
+attr global motd none
+attr global sendStatistics onUpdate
+attr global statefile ./log/fhem.save
+attr global uniqueID ./FHEM/FhemUtils/uniqueID
+attr global updateInBackground 1
+attr global verbose 3
+attr global userattr cmdIcon devStateIcon devStateStyle icon sortby webCmd widgetOverride
+
+# ========================
+# APIs and GUIs
+# ========================
+
+define telnetPort telnet 7072 global
+attr   telnetPort globalpassword {{ _fhem.security.telnet.password }}
+attr   telnetPort password {{ _fhem.security.telnet.password }}
+attr   telnetPort allowfrom 192\.168\.192\.[0-9]{3}
+
+define WEB FHEMWEB 8083 global
+attr   WEB JavaScripts codemirror/fhem_codemirror.js
+attr   WEB basicAuth {{ (_fhem.security.web.user ~ ":" ~ _fhem.security.web.password) | b64encode }}
+attr   WEB codemirrorParam { "theme":"blackboard", "lineNumbers":true }
+attr   WEB stylesheetPrefix dark
+
+define WEBphone FHEMWEB 8084
+attr   WEBphone basicAuth {{ (_fhem.security.web.user ~ ":" ~ _fhem.security.web.password) | b64encode }}
+attr   WEBphone stylesheetPrefix smallscreen
+
+define WEBtablet FHEMWEB 8085
+attr   WEBtablet basicAuth {{ (_fhem.security.web.user ~ ":" ~ _fhem.security.web.password) | b64encode }}
+attr   WEBtablet stylesheetPrefix touchpad
+
+# Fake FileLog entry, to access the fhem log from FHEMWEB
+define autocreate autocreate
+attr   autocreate filelog ./log/%NAME-%Y-%m.log
+
+define eventTypes eventTypes ./log/eventTypes.txt
+
+# ========================
+# IO DEVICES
+# ========================
+
+# Disable this to avoid looking for new USB devices on startup
+# define initialUsbCheck notify global:INITIALIZED usb create
+
+#define CUL_868 CUL {{ _fhem.io.devices.cul.868.device_path }}@9600 1034
+#attr   CUL_868 hmId {{ _fhem.homematic.hmId }}
+#attr   CUL_868 icon cul_868
+#attr   CUL_868 rfmode HomeMatic
+
+define CUL_433 CUL {{ _fhem.io.devices.cul.433.device_path }}@9600 1134
+attr   CUL_433 icon cul_cul
+
+# ========================
+# DEVICE DEFINITIONS
+# ========================
+
+# ========================
+# InterTechno Switches
+# ========================
+{% for s in _fhem.intertechno.devices %}
+# ------------------------
+define {{ s.name }} IT {{ s.code }}  FF F0
+attr   {{ s.name }} userattr room_map structexclude
+attr   {{ s.name }} IODev CUL_433
+attr   {{ s.name }} alias {{ s.alias }}
+#attr   {{ s.name }} fm_type offbutton,onbutton,lamp
+attr   {{ s.name }} group {{ s.group }}
+attr   {{ s.name }} icon {{ s.icon|default("light_light") }}
+attr   {{ s.name }} model itswitch
+attr   {{ s.name }} room {{ s.rooms|join(',') }},IT
+# ------------------------
+
+{% endfor %}
+

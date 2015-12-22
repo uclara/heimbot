@@ -1,0 +1,4 @@
+---
+- name: Restart Fhem
+  service: name=fhem state=restarted
+

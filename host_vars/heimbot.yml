@@ -7,7 +7,47 @@ CUL:
 
 
 FHEM:
-  firware_flash_support: Yes
+  firware_flash_support: No
+  security:
+    telnet:
+      password: "{{ S_FHEM.security.telnet.password }}"
+    web:
+      user: fhem
+      password: "{{ S_FHEM.security.web.password }}"
+  io:
+    devices:
+      cul:
+        433:
+          device_path: "/dev/{{ CUL.symlinks.433 }}"
+        868:
+          device_path: "/dev/{{ CUL.symlinks.868 }}"
+  intertechno:
+    devices:
+      - name: schalter_1A
+        code: 000000000F
+        alias: Weihnachtsbaum
+        group: Licht
+        rooms:
+          - Wohnzimmer
+          - Homekit
+      - name: schalter_1B
+        code: 0000F0000F
+        alias: "Papierleuchte am Esstisch"
+        group: Licht
+        rooms:
+          - Wohnzimmer
+          - Homekit
+      - name: schalter_1C
+        code: 00000F000F
+        alias: "Papierleuchte am Fernseher"
+        group: Licht
+        rooms:
+          - Wohnzimmer
+          - Homekit
+  homematic:
+    hmId: Lukas
+
+
 
 NETWORKING:
   use_wifi: Yes

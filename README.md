@@ -77,6 +77,8 @@ The site playbook supports a few parameters which you can pass via `--extra-vars
 
 * `apt_update=[True|False]` -- `base`: Updates Apt cache and runs an upgrade
 
+* `clean_fhem_saved_state=[True|False]` -- `fhem`: Clears Fhem saved state
+
 
 ## 3. CUL Flushing
 
