@@ -115,8 +115,8 @@ NETWORKING:
         wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
         iface default inet dhcp
       wifi:
-        ssid: PDT-02
-        password: "{{ S_NETWORKING.wifi.pdt_02.password }}"
+        ssid: PDT-01
+        password: "{{ S_NETWORKING.wifi.pdt_01.password }}"
       firmware:
         package: firmware-ralink
 
