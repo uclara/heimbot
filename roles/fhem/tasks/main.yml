@@ -1,0 +1,19 @@
+---
+
+- name: Add FHEM APT Repository
+  apt_repository: repo="deb https://debian.fhem.de/stable ./" state=present update_cache=yes
+
+- name: Install FHEM
+  apt: name={{ item }} state=latest force=yes
+  with_items:
+    - make
+    - dfu-programmer
+    - fhem
+  register: installation_changed
+
+- name: Install CUL Flash Support
+  apt: name={{ item }} state=latest force=yes
+  with_items:
+    - make
+    - dfu-programmer
+  when: _fhem.firware_flash_support

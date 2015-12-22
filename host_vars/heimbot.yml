@@ -5,6 +5,10 @@ CUL:
     433: CUL433
     868: CUL868
 
+
+FHEM:
+  firware_flash_support: Yes
+
 NETWORKING:
   use_wifi: Yes
   interfaces:

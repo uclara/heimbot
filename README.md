@@ -7,6 +7,8 @@
 - [1. Initial Manual Steps](#1-initial-manual-steps)
 - [2. Automatic Steps using Ansible](#2-automatic-steps-using-ansible)
   - [2.1. Bootstrap](#21-bootstrap)
+  - [2.2 Set Up Services](#22-set-up-services)
+- [3. CUL Flushing](#3-cul-flushing)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -58,6 +60,7 @@
 
 1. Install Python
 
+1. In case the CUL USB transmitter are not yet flushed please see CUL Flushing
 
 ## 2. Automatic Steps using Ansible
 
@@ -74,4 +77,41 @@ The site playbook supports a few parameters which you can pass via `--extra-vars
 
 * `apt_update=[True|False]` -- `base`: Updates Apt cache and runs an upgrade
 
+
+## 3. CUL Flushing
+
+Usually, the CUL USB transmitter come without a firmware and need to be flashed first. You can use your Raspberry Pi to do this. Just set `FHEM.firware_flash_support` to `Yes` in `host_vars/heimbot.yml` and rerun the FHEM role. This will install the necessary tools. Then follow the next steps. For detailed instructions see [culfw](http://culfw.de) and [CUL am Raspberry Pi flashen](http://www.fhemwiki.de/wiki/CUL_am_Raspberry_Pi_flashen#Raspberry_Pi_mit_Raspbian).
+
+1. Download Firmware -- cf. [culfw - Source (and compiled firmware)](http://culfw.de/culfw.html#Links)
+
+1. Unpack the tar ball and change into the directory `Devices/CUL`
+
+1. Insert a CUL USB transmitter into an USB port _while pressing the little button on the back_. This sets the transmitter into flush mode.
+
+1. In the directory `Devices/CUL` run `make usbprogram`. This will show you which programm may be specified. For a CUL V3.4 use `usbprogram_v3`
+
+1. Run the flush programm, e.g., `make usbprogram_v3`
+
+    ```
+       root@heimbot:/tmp/culfw/CUL_VER_161/Devices/CUL# make usbprogram_v3
+       dfu-programmer atmega32u4 erase || true
+       dfu-programmer atmega32u4 flash CUL_V3.hex
+       Validating...
+       23220 bytes used (80.98%)
+       dfu-programmer atmega32u4 start
+    ```
+
+1. `dmesg -T` should show this
+
+    ```
+       [Tue Dec 22 10:25:46 2015] cdc_acm 1-1.2:1.0: ttyACM0: USB ACM device
+       [Tue Dec 22 10:25:50 2015] usb 1-1.3: new full-speed USB device number 19 using dwc_otg
+       [Tue Dec 22 10:25:51 2015] usb 1-1.3: New USB device found, idVendor=03eb, idProduct=204b
+       [Tue Dec 22 10:25:51 2015] usb 1-1.3: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+       [Tue Dec 22 10:25:51 2015] usb 1-1.3: Product: CUL868
+       [Tue Dec 22 10:25:51 2015] usb 1-1.3: Manufacturer: busware.de
+       [Tue Dec 22 10:25:51 2015] cdc_acm 1-1.3:1.0: ttyACM1: USB ACM device
+    ```
+
+1. Repeat from step 3 for all CUL USB transmitters.
 
