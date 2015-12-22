@@ -9,6 +9,7 @@ BASE:
     - ntp
     - iproute2
     - jq
+    - apt-transport-https
 
 UNIX_USERS:
   - name: lukas

@@ -5,7 +5,7 @@
   when: apt_update is defined
 
 - name: Install Base Packages
-  apt: name={{ item }} state=latest
+  apt: name={{ item }} state=latest force=yes
   with_items: _base.packages
 
 - name: Set Default Target to Multi-User
