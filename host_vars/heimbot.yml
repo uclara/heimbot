@@ -22,6 +22,7 @@ FHEM:
         868:
           device_path: "/dev/{{ CUL.symlinks.868 }}"
   intertechno:
+    # siehe http://www.fhemwiki.de/wiki/Intertechno_Code_Berechnung
     devices:
       - name: schalter_1A
         code: 000000000F
@@ -46,6 +47,30 @@ FHEM:
         group: Licht
         rooms:
           - Wohnzimmer
+          - Homekit
+      - name: schalter_2A
+        code: 000000F00F
+        alias: Fische
+        group: Licht
+        fm_type: offbutton,onbutton,lamp,light
+        rooms:
+          - Flur
+          - Homekit
+      - name: schalter_2B
+        code: 0000F0F00F
+        alias: ""
+        group: Licht
+        fm_type: offbutton,onbutton,lamp
+        rooms:
+          - Flur
+          - Homekit
+      - name: schalter_2C
+        code: 00000FF00F
+        alias: ""
+        fm_type: offbutton,onbutton,lamp
+        group: Licht
+        rooms:
+          - Flur
           - Homekit
   homematic:
     hmId: Lukas
