@@ -23,17 +23,15 @@
   unarchive: src="/var/lib/downloads/nodejs.tgz" dest=/opt/nodejs mode=0755 owner=root group=root copy=no
   when: download|changed
 
-- name: Set Installed Node.js active alternative
+- name: Set Installed Node.js Active Alternative
   command: update-alternatives --install "/usr/bin/{{ item }}" {{ item }} /opt/nodejs/{{ _homebridge.nodejs.version }}/bin/{{ item }} 1000
   with_items:
     - node
     - npm
 
-- name: Install Homebridge
+- name: Install Homebridge and Modules
   npm: global=yes name={{ item }} state=latest
-  with_items:
-    - homebridge
-    - homebridge-fhem
+  with_items: _homebridge.modules
 
 - name: Install Homebridge Systemd Unit
   copy: src="{{ item }}" dest="/{{ item }}" owner=root group=root mode=0644

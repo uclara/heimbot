@@ -55,6 +55,17 @@ HOMEBRIDGE:
   security:
     username: "{{ S_HOMEBRIDGE.security.username }}"
     pin: "{{ S_HOMEBRIDGE.security.pin }}"
+  modules:
+    - homebridge
+    - homebridge-fhem
+    - homebridge-sonos
+  accessories:
+    - accessory: "Sonos"
+      name: "Wohnzimmer Boxen"
+      room: "Wohnzimmer"
+    - accessory: "Sonos"
+      name: "Arbeitszimmer Boxen"
+      room: "Arbeitszimmer"
   platforms:
     fhem:
       security:
