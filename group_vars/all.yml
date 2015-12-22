@@ -10,6 +10,7 @@ BASE:
     - iproute2
     - jq
     - apt-transport-https
+    - git
 
 UNIX_USERS:
   - name: lukas

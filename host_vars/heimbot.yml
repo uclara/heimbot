@@ -27,6 +27,7 @@ FHEM:
         code: 000000000F
         alias: Weihnachtsbaum
         group: Licht
+        fm_type: offbutton,onbutton,lamp,light
         rooms:
           - Wohnzimmer
           - Homekit
@@ -34,12 +35,14 @@ FHEM:
         code: 0000F0000F
         alias: "Papierleuchte am Esstisch"
         group: Licht
+        fm_type: offbutton,onbutton,lamp
         rooms:
           - Wohnzimmer
           - Homekit
       - name: schalter_1C
         code: 00000F000F
         alias: "Papierleuchte am Fernseher"
+        fm_type: offbutton,onbutton,lamp
         group: Licht
         rooms:
           - Wohnzimmer
@@ -47,6 +50,19 @@ FHEM:
   homematic:
     hmId: Lukas
 
+
+HOMEBRIDGE:
+  security:
+    username: "{{ S_HOMEBRIDGE.security.username }}"
+    pin: "{{ S_HOMEBRIDGE.security.pin }}"
+  platforms:
+    fhem:
+      security:
+        user: "{{ FHEM.security.web.user }}"
+        password: "{{ FHEM.security.web.password }}"
+  nodejs:
+    version: node-v4.2.3-linux-armv7l
+    download_url: https://nodejs.org/dist/v4.2.3/node-v4.2.3-linux-armv7l.tar.gz
 
 
 NETWORKING:

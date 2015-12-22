@@ -10,7 +10,7 @@ attr global statefile ./log/fhem.save
 attr global uniqueID ./FHEM/FhemUtils/uniqueID
 attr global updateInBackground 1
 attr global verbose 3
-attr global userattr cmdIcon devStateIcon devStateStyle icon sortby webCmd widgetOverride
+attr global userattr cmdIcon devStateIcon devStateStyle fm_type icon room_map sortby structexclude webCmd widgetOverride genericDeviceType:ignore,switch,outlet,light,blind,speaker,thermostat,lock,window,contact
 
 # ========================
 # APIs and GUIs
@@ -69,7 +69,7 @@ define {{ s.name }} IT {{ s.code }}  FF F0
 attr   {{ s.name }} userattr room_map structexclude
 attr   {{ s.name }} IODev CUL_433
 attr   {{ s.name }} alias {{ s.alias }}
-#attr   {{ s.name }} fm_type offbutton,onbutton,lamp
+attr   {{ s.name }} fm_type {{ s.fm_type }}
 attr   {{ s.name }} group {{ s.group }}
 attr   {{ s.name }} icon {{ s.icon|default("light_light") }}
 attr   {{ s.name }} model itswitch

@@ -8,4 +8,5 @@
     - { role: networking, tags: [ 'networking' ], _networking: "{{ NETWORKING }}" }
     - { role: udev, tags: [ 'udev' ], _udev: "{{ UDEV }}" }
     - { role: fhem, tags: [ 'fhem' ], _fhem: "{{ FHEM }}" }
+    - { role: homebridge, tags: [ 'homebridge' ], _homebridge: "{{ HOMEBRIDGE}}" }
 
