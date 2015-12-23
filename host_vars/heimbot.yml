@@ -74,6 +74,17 @@ FHEM:
           - Homekit
   homematic:
     hmId: Lukas
+  extra: |+
+    # ========================
+    # Additional Devices
+    # ========================
+    #
+    define Fernseher STV 192.168.101.12
+    attr Fernseher icon it_television
+    attr Fernseher devStateIcon .*on:audio_volume_high .*off:audio_volume_mute .*:unknown
+    attr Fernseher room Wohnzimmer
+    attr Fernseher webCmd mute on:mute off
+  end:
 
 
 HOMEBRIDGE:
