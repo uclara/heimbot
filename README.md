@@ -75,9 +75,11 @@
 
 The site playbook supports a few parameters which you can pass via `--extra-vars "parameter=value"`:
 
-* `apt_update=[True|False]` -- `base`: Updates Apt cache and runs an upgrade
+* `apt_update=[True|False]` -- `base`: Updates Apt cache and runs an upgrade.
 
-* `clean_fhem_saved_state=[True|False]` -- `fhem`: Clears Fhem saved state
+* `clean_fhem_saved_state=[True|False]` -- `fhem`: Clears Fhem saved state.
+
+* `clean_homebridge_identifier_cache=[True|False]` -- `homebridge`: Clears Homebridge identifier cache and restarts homebridge.
 
 
 ## 3. CUL Flushing
