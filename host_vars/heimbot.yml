@@ -60,6 +60,21 @@ FHEM:
         gen_type: light
         group: Licht
         rooms: [ hidden ]
+      - name: schalter_3A
+        code: 0000000F0F
+        group: Licht
+        gen_type: light
+        rooms: [ hidden ]
+      - name: schalter_3B
+        code: 0000F00F0F
+        group: Licht
+        gen_type: light
+        rooms: [ hidden ]
+      - name: schalter_3C
+        code: 00000F0F0F
+        gen_type: light
+        group: Licht
+        rooms: [ hidden ]
   homematic:
     hmId: "{{ S_FHEM.homematic.hmId }}"
     devices:
