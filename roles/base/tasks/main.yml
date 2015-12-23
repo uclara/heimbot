@@ -2,7 +2,7 @@
 
 - name: Update Apt Repositories
   apt: update_cache=yes upgrade=yes
-  when: apt_update is defined
+  when: apt_update|default(False)|bool
 
 - name: Install Base Packages
   apt: name={{ item }} state=latest force=yes

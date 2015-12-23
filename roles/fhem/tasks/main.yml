@@ -26,7 +26,7 @@
 
 - name: Remove Fhem Saved State
   file: name=/opt/fhem/log/fhem.save state=absent
-  when: clean_fhem_saved_state is defined and clean_fhem_saved_state
+  when: clean_fhem_saved_state|default(False)|bool
   notify:
     - Restart Fhem
 
