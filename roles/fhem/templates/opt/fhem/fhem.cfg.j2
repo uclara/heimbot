@@ -63,13 +63,16 @@ attr   CUL_433 icon cul_cul
 # ========================
 # InterTechno Switches
 # ========================
+#
+# genericDeviceType setzt den Gerätetypen für Homebridge / HomeKit -- cf. http://forum.fhem.de/index.php/topic,32652.msg377941.html#msg377941
+#
 {% for s in _fhem.intertechno.devices %}
 # ------------------------
 define {{ s.name }} IT {{ s.code }}  FF F0
 attr   {{ s.name }} userattr room_map structexclude
 attr   {{ s.name }} IODev CUL_433
 attr   {{ s.name }} alias {{ s.alias }}
-attr   {{ s.name }} fm_type {{ s.fm_type }}
+attr   {{ s.name }} genericDeviceType {{ s.gen_type }}
 attr   {{ s.name }} group {{ s.group }}
 attr   {{ s.name }} icon {{ s.icon|default("light_light") }}
 attr   {{ s.name }} model itswitch
