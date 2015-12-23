@@ -73,7 +73,113 @@ FHEM:
           - Flur
           - Homekit
   homematic:
-    hmId: Lukas
+    hmId: "{{ S_FHEM.homematic.hmId }}"
+    devices:
+      - name: schalter_HM1
+        address: 3705C3
+        serialNr: MEQ0273212
+        subType: powerMeter
+        IODev: CUL_868
+        actCycle: 000:10
+        actStatus: alive
+        autoReadReg: 4_reqStatus
+        expert: 2_full
+        firmware: 1.6
+        model: HM-ES-PMSw1-Pl
+        webCmd: "getConfig:clear msgEvents"
+        channels:
+          - name: Switch
+            channel: 01
+            alias: "Papierleuchte am Esstisch"
+            group: Licht
+            gen_type: light
+            icon: "light_light"
+            rooms: [ Wohnzimmer, Homekit ]
+          - name: Power
+            channel: 02
+            rooms: [ hidden ]
+          - name: PowerSenor
+            channel: 03
+            rooms: [ hidden ]
+          - name: CurrentSenor
+            channel: 04
+            rooms: [ hidden ]
+          - name: VoltageSenor
+            channel: 05
+            rooms: [ hidden ]
+          - name: FrequencySenor
+            channel: 06
+            rooms: [ hidden ]
+      - name: schalter_HM2
+        address: 3705E8
+        serialNr: MEQ0273249
+        subType: powerMeter
+        IODev: CUL_868
+        actCycle: 000:10
+        actStatus: alive
+        autoReadReg: 4_reqStatus
+        expert: 2_full
+        firmware: 1.6
+        model: HM-ES-PMSw1-Pl
+        webCmd: "getConfig:clear msgEvents"
+        channels:
+          - name: Switch
+            channel: 01
+            alias: "Papierleuchte am Fernseher"
+            group: Licht
+            gen_type: light
+            icon: "light_light"
+            rooms: [ Wohnzimmer, Homekit ]
+          - name: Power
+            channel: 02
+            rooms: [ hidden ]
+          - name: PowerSenor
+            channel: 03
+            rooms: [ hidden ]
+          - name: CurrentSenor
+            channel: 04
+            rooms: [ hidden ]
+          - name: VoltageSenor
+            channel: 05
+            rooms: [ hidden ]
+          - name: FrequencySenor
+            channel: 06
+            rooms: [ hidden ]
+      - name: schalter_HM3
+        address: 37C3FD
+        serialNr: MEQ0269952
+        subType: powerMeter
+        IODev: CUL_868
+        actCycle: 000:10
+        actStatus: alive
+        autoReadReg: 4_reqStatus
+        expert: 2_full
+        firmware: 1.6
+        model: HM-ES-PMSw1-Pl
+        webCmd: "getConfig:clear msgEvents"
+        channels:
+          - name: Switch
+            channel: 01
+            alias: "Stehlampe"
+            group: Licht
+            gen_type: light
+            icon: "light_light"
+            rooms: [ Wohnzimmer, Homekit ]
+          - name: Power
+            channel: 02
+            rooms: [ hidden ]
+          - name: PowerSenor
+            channel: 03
+            rooms: [ hidden ]
+          - name: CurrentSenor
+            channel: 04
+            rooms: [ hidden ]
+          - name: VoltageSenor
+            channel: 05
+            rooms: [ hidden ]
+          - name: FrequencySenor
+            channel: 06
+            rooms: [ hidden ]
   extra: |+
     # ========================
     # Additional Devices

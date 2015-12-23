@@ -48,10 +48,10 @@ define eventTypes eventTypes ./log/eventTypes.txt
 # Disable this to avoid looking for new USB devices on startup
 # define initialUsbCheck notify global:INITIALIZED usb create
 
-#define CUL_868 CUL {{ _fhem.io.devices.cul.868.device_path }}@9600 1034
-#attr   CUL_868 hmId {{ _fhem.homematic.hmId }}
-#attr   CUL_868 icon cul_868
-#attr   CUL_868 rfmode HomeMatic
+define CUL_868 CUL {{ _fhem.io.devices.cul.868.device_path }}@9600 1034
+attr   CUL_868 hmId {{ _fhem.homematic.hmId }}
+attr   CUL_868 icon cul_868
+attr   CUL_868 rfmode HomeMatic
 
 define CUL_433 CUL {{ _fhem.io.devices.cul.433.device_path }}@9600 1134
 attr   CUL_433 icon cul_cul
@@ -80,6 +80,61 @@ attr   {{ s.name }} room {{ s.rooms|join(',') }},IT
 # ------------------------
 
 {% endfor %}
+
+
+# ========================
+# HomeMatic
+# ========================
+# cf. http://www.fhemwiki.de/wiki/HM-ES-PMSw1-Pl_Funk-Schaltaktor_1-fach_mit_Leistungsmessung#Plots.2FGrafiken for HM-ES-PMSw1-Pl
+#
+define ActionDetector CUL_HM 000000
+attr ActionDetector event-on-change-reading .*
+attr ActionDetector model ActionDetector
+
+{% for d in _fhem.homematic.devices %}
+# ------------------------
+define {{ d.name }} CUL_HM {{ d.address }}
+attr   {{ d.name }} serialNr {{ d.serialNr }}
+attr   {{ d.name }} subType {{ d.subType }}
+attr   {{ d.name }} IODev {{ d.IODev }}
+attr   {{ d.name }} actCycle {{ d.actCycle }}
+attr   {{ d.name }} actStatus {{ d.actStatus }}
+attr   {{ d.name }} autoReadReg {{ d.autoReadReg }}
+attr   {{ d.name }} expert {{ d.expert }}
+attr   {{ d.name }} firmware {{ d.firmware }}
+attr   {{ d.name }} model {{ d.model }}
+attr   {{ d.name }} room hidden
+attr   {{ d.name }} webCmd {{ d.webCmd }}
+{% if d.alias is defined %}
+attr   {{ d.name }} alias {{ d.alias }}
+{% endif %}
+
+define FileLog_{{ d.address }} FileLog ./log/{{ d.address }}-%Y-%m.log {{ d.name }}
+attr   FileLog_{{ d.address }} logtype text
+attr   FileLog_{{ d.address }} room hidden
+
+{% for c in d.channels %}
+define {{ d.name }}_{{ c.name }} CUL_HM {{ d.address }}{{ "%02d"|format(c.channel) }}
+attr   {{ d.name }}_{{ c.name }} model {{ d.model }}
+{% if c.alias is defined %}
+attr   {{ d.name }}_{{ c.name }} alias {{ c.alias }}
+{% endif %}
+{% if c.group is defined %}
+attr   {{ d.name }}_{{ c.name }} group {{ c.group }}
+{% endif %}
+{% if c.gen_type is defined %}
+attr   {{ d.name }}_{{ c.name }} genericDeviceType {{ c.gen_type }}
+{% endif %}
+{% if c.icon is defined %}
+attr   {{ d.name }}_{{ c.name }} icon {{ c.icon }}
+{% endif %}
+attr   {{ d.name }}_{{ c.name }} peerIDs 00000000,
+attr   {{ d.name }}_{{ c.name }} room {{ c.rooms|join(',') }},HomeMatic
+{% endfor %}
+# ------------------------
+
+{% endfor %}
+
 
 {{ _fhem.extra }}
 

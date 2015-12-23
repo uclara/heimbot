@@ -8,7 +8,9 @@
 - [2. Automatic Steps using Ansible](#2-automatic-steps-using-ansible)
   - [2.1. Bootstrap](#21-bootstrap)
   - [2.2 Set Up Services](#22-set-up-services)
-- [3. CUL Flushing](#3-cul-flushing)
+- [3. Teaching-in of Devices](#3-teaching-in-of-devices)
+  - [3.1 HomeMatic](#31-homematic)
+- [4. CUL Flushing](#4-cul-flushing)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -16,8 +18,7 @@
 
 1. Download [Minibian](https://minibianpi.wordpress.com/download/)
 
-1. Write Image to SD card
-  cf. [eLinux Max Os X How-To](http://elinux.org/RPi_Easy_SD_Card_Setup#Using_command_line_tools_.282.29)
+1. Write Image to SD card -- cf. [eLinux Max Os X How-To](http://elinux.org/RPi_Easy_SD_Card_Setup#Using_command_line_tools_.282.29)
 
     1. `diskutil list`
 
@@ -31,8 +32,7 @@
 
 1. Boot Image
 
-1. Resize SD
-  cf. [Minibian How-To](https://minibianpi.wordpress.com/how-to/resize-sd)
+1. Resize SD -- cf. [Minibian How-To](https://minibianpi.wordpress.com/how-to/resize-sd)
 
     1. `ssh root@minibian`
 
@@ -82,7 +82,32 @@ The site playbook supports a few parameters which you can pass via `--extra-vars
 * `clean_homebridge_identifier_cache=[True|False]` -- `homebridge`: Clears Homebridge identifier cache and restarts homebridge.
 
 
-## 3. CUL Flushing
+## 3. Teaching-in of Devices
+
+### 3.1 HomeMatic
+
+In order to control a new HomeMatic device, you need to _pair_ it with Fhem first -- cf. [IO-Device in den Pairing-Modus versetzen](http://www.fhemwiki.de/wiki/HomeMatic_Devices_pairen#IO-Device_in_den_Pairing-Modus_versetzen) for details.
+
+1. `set CUL_868 hmPairForSec 60` -- Set Fhem into Teaching-in mode accepting pairing requests of HomeMatic device for 60 s.
+
+1. `define autocreate autocreate` -- Optionally set Fhem to autocreate new devices.
+
+1. Follow the instruction from the manual of your HomeMatic device to initiate a pairing attempt. For a switch like the `HM-ES-PMSw1-Pl`, hold the button for at least 5 s until the LED start to blink orange.
+
+In case of a successful paring, you will see the similar lines in the Fhem log:
+
+```
+2015.12.23 17:12:00 2: CUL_HM Unknown device HM_3705C3 is now defined
+2015.12.23 17:12:00 2: autocreate: define HM_3705C3 CUL_HM 3705C3
+2015.12.23 17:12:00 2: autocreate: define FileLog_HM_3705C3 FileLog ./log/HM_3705C3-%Y-%m.log HM_3705C3
+2015.12.23 17:12:00 3: Device HM_3705C3 added to ActionDetector with 000:10 time
+2015.12.23 17:12:00 3: CUL_HM pair: HM_3705C3 powerMeter, model HM-ES-PMSw1-Pl serialNr
+2015.12.23 17:12:04 3: CUL_HM set HM_3705C3 getConfig
+2015.12.23 17:12:05 3: Device HM_3705C3 added to ActionDetector with 000:10 time
+```
+
+
+## 4. CUL Flushing
 
 Usually, the CUL USB transmitter come without a firmware and need to be flashed first. You can use your Raspberry Pi to do this. Just set `FHEM.firware_flash_support` to `Yes` in `host_vars/heimbot.yml` and rerun the FHEM role. This will install the necessary tools. Then follow the next steps. For detailed instructions see [culfw](http://culfw.de) and [CUL am Raspberry Pi flashen](http://www.fhemwiki.de/wiki/CUL_am_Raspberry_Pi_flashen#Raspberry_Pi_mit_Raspbian).
 
@@ -118,4 +143,5 @@ Usually, the CUL USB transmitter come without a firmware and need to be flashed 
     ```
 
 1. Repeat from step 3 for all CUL USB transmitters.
+
 
