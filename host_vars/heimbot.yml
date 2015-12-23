@@ -26,7 +26,7 @@ FHEM:
     devices:
       - name: schalter_1A
         code: 000000000F
-        alias: Schirmlampe
+        alias: Weichnachtsbaum
         group: Licht
         gen_type: light
         rooms:
@@ -34,20 +34,14 @@ FHEM:
           - Homekit
       - name: schalter_1B
         code: 0000F0000F
-        alias: "Papierleuchte am Esstisch"
         group: Licht
         gen_type: light
-        rooms:
-          - Wohnzimmer
-          - Homekit
+        rooms: [ hidden ]
       - name: schalter_1C
         code: 00000F000F
-        alias: "Papierleuchte am Fernseher"
         gen_type: light
         group: Licht
-        rooms:
-          - Wohnzimmer
-          - Homekit
+        rooms: [ hidden ]
       - name: schalter_2A
         code: 000000F00F
         alias: Fische
@@ -58,20 +52,14 @@ FHEM:
           - Homekit
       - name: schalter_2B
         code: 0000F0F00F
-        alias: Weichnachtsbaum
         group: Licht
         gen_type: light
-        rooms:
-          - Wohnzimmer
-          - Homekit
+        rooms: [ hidden ]
       - name: schalter_2C
         code: 00000FF00F
-        alias: ""
         gen_type: light
         group: Licht
-        rooms:
-          - Flur
-          - Homekit
+        rooms: [ hidden ]
   homematic:
     hmId: "{{ S_FHEM.homematic.hmId }}"
     devices:

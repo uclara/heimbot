@@ -71,7 +71,9 @@ attr   CUL_433 icon cul_cul
 define {{ s.name }} IT {{ s.code }}  FF F0
 attr   {{ s.name }} userattr room_map structexclude
 attr   {{ s.name }} IODev CUL_433
+{% if s.alias is defined %}
 attr   {{ s.name }} alias {{ s.alias }}
+{% endif %}
 attr   {{ s.name }} genericDeviceType {{ s.gen_type }}
 attr   {{ s.name }} group {{ s.group }}
 attr   {{ s.name }} icon {{ s.icon|default("light_light") }}
