@@ -26,6 +26,8 @@ attr   WEB JavaScripts codemirror/fhem_codemirror.js
 attr   WEB basicAuth {{ (_fhem.security.web.user ~ ":" ~ _fhem.security.web.password) | b64encode }}
 attr   WEB codemirrorParam { "theme":"blackboard", "lineNumbers":true }
 attr   WEB stylesheetPrefix dark
+attr   WEB roomIcons Flur:scene_summerhouse Wohnzimmer:scene_livingroom Arbeitszimmer:scene_workshop
+attr WEB group Licht
 
 define WEBphone FHEMWEB 8084
 attr   WEBphone basicAuth {{ (_fhem.security.web.user ~ ":" ~ _fhem.security.web.password) | b64encode }}
