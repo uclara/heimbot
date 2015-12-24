@@ -7,7 +7,7 @@
     - iw
     - crda
     - wireless-regdb
-  when: _networking.use_wifi
+  when: _networking.use_wifi|bool|default(False)
 
 - name: Install WiFi Adapter Firmware
   apt: name={{ item.firmware.package }} state=present
