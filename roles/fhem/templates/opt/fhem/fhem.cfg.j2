@@ -118,6 +118,9 @@ attr   FileLog_{{ d.address }} room hidden
 {% for c in d.channels %}
 define {{ d.name }}_{{ c.name }} CUL_HM {{ d.address }}{{ "%02d"|format(c.channel) }}
 attr   {{ d.name }}_{{ c.name }} model {{ d.model }}
+{% if c.subType is defined %}
+attr   {{ d.name }}_{{ c.name }} subType {{ c.subType }}
+{% endif %}
 {% if c.alias is defined %}
 attr   {{ d.name }}_{{ c.name }} alias {{ c.alias }}
 {% endif %}

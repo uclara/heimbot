@@ -93,6 +93,7 @@ FHEM:
         channels:
           - name: Switch
             channel: 01
+            subType: switch
             alias: "Papierleuchte am Esstisch"
             group: Licht
             gen_type: light
@@ -127,6 +128,7 @@ FHEM:
         webCmd: "getConfig:clear msgEvents"
         channels:
           - name: Switch
+            subType: switch
             channel: 01
             alias: "Papierleuchte am Fernseher"
             group: Licht
@@ -162,6 +164,7 @@ FHEM:
         webCmd: "getConfig:clear msgEvents"
         channels:
           - name: Switch
+            subType: switch
             channel: 01
             alias: "Stehlampe"
             group: Licht
