@@ -26,7 +26,7 @@ FHEM:
     devices:
       - name: schalter_1A
         code: 000000000F
-        alias: Weichnachtsbaum
+        alias: Weihnachtsbaum
         group: Licht
         gen_type: light
         rooms:
