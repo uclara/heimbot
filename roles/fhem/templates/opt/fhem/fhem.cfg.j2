@@ -30,14 +30,6 @@ attr WEB sortRooms Wohnzimmer Arbeitszimmer Flur
 attr WEB roomIcons Flur:scene_summerhouse Wohnzimmer:scene_livingroom Arbeitszimmer:scene_workshop
 attr WEB group Licht
 
-define WEBphone FHEMWEB 8084
-attr WEBphone basicAuth {{ (_fhem.security.web.user ~ ":" ~ _fhem.security.web.password) | b64encode }}
-attr WEBphone stylesheetPrefix smallscreen
-
-define WEBtablet FHEMWEB 8085
-attr WEBtablet basicAuth {{ (_fhem.security.web.user ~ ":" ~ _fhem.security.web.password) | b64encode }}
-attr WEBtablet stylesheetPrefix touchpad
-
 # Fake FileLog entry, to access the fhem log from FHEMWEB
 define autocreate autocreate
 attr autocreate filelog ./log/%NAME-%Y-%m.log
