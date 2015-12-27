@@ -24,7 +24,7 @@ FHEM:
   intertechno:
     # siehe http://www.fhemwiki.de/wiki/Intertechno_Code_Berechnung
     devices:
-      - name: schalter_1A
+      schalter_1A:
         code: 000000000F
         alias: Weihnachtsbaum
         group: Licht
@@ -32,17 +32,20 @@ FHEM:
         rooms:
           - Wohnzimmer
           - Homekit
-      - name: schalter_1B
+      schalter_1B:
         code: 0000F0000F
+        alias: Discobaum
         group: Licht
         gen_type: light
-        rooms: [ hidden ]
-      - name: schalter_1C
+        rooms:
+          - Wohnzimmer
+          - Homekit
+      schalter_1C:
         code: 00000F000F
         gen_type: light
         group: Licht
         rooms: [ hidden ]
-      - name: schalter_2A
+      schalter_2A:
         code: 000000F00F
         alias: Fische
         group: Licht
@@ -50,27 +53,30 @@ FHEM:
         rooms:
           - Flur
           - Homekit
-      - name: schalter_2B
+      schalter_2B:
         code: 0000F0F00F
-        group: Licht
-        gen_type: light
-        rooms: [ hidden ]
-      - name: schalter_2C
+        alias: Fischbubbles
+        group: Schalter
+        gen_type: switch
+        rooms:
+          - Flur
+          - Homekit
+      schalter_2C:
         code: 00000FF00F
         gen_type: light
         group: Licht
         rooms: [ hidden ]
-      - name: schalter_3A
+      schalter_3A:
         code: 0000000F0F
         group: Licht
         gen_type: light
         rooms: [ hidden ]
-      - name: schalter_3B
+      schalter_3B:
         code: 0000F00F0F
         group: Licht
         gen_type: light
         rooms: [ hidden ]
-      - name: schalter_3C
+      schalter_3C:
         code: 00000F0F0F
         gen_type: light
         group: Licht
@@ -78,7 +84,7 @@ FHEM:
   homematic:
     hmId: "{{ S_FHEM.homematic.hmId }}"
     devices:
-      - name: schalter_HM1
+      schalter_HM1:
         address: 3705C3
         serialNr: MEQ0273212
         subType: powerMeter
@@ -114,7 +120,7 @@ FHEM:
           - name: FrequencySenor
             channel: 06
             rooms: [ hidden ]
-      - name: schalter_HM2
+      schalter_HM2:
         address: 3705E8
         serialNr: MEQ0273249
         subType: powerMeter
@@ -150,7 +156,7 @@ FHEM:
           - name: FrequencySenor
             channel: 06
             rooms: [ hidden ]
-      - name: schalter_HM3
+      schalter_HM3:
         address: 37C3FD
         serialNr: MEQ0269952
         subType: powerMeter
@@ -197,6 +203,24 @@ FHEM:
     attr Fernseher room Wohnzimmer
     attr Fernseher webCmd mute on:mute off
   end:
+
+
+FHEM_TABLET_UI:
+  update: No
+  install_dir: /opt/fhem-tablet-ui
+  rooms:
+    Wohnzimmer:
+      #devices: "{{ FHEM.intertechno.devices|selectattr('alias', 'defined')|list + FHEM.homematic.devices|map(attribute='channels')|map('first')|list }}"
+      devices:
+        schalter_HM1_Switch: "{{ FHEM.homematic.devices['schalter_HM1'].channels|first }}"
+        schalter_HM2_Switch: "{{ FHEM.homematic.devices['schalter_HM2'].channels|first }}"
+        schalter_HM3_Switch: "{{ FHEM.homematic.devices['schalter_HM3'].channels|first }}"
+        schalter_1A: "{{ FHEM.intertechno.devices['schalter_1A'] }}"
+        schalter_1B: "{{ FHEM.intertechno.devices['schalter_1B'] }}"
+    Flur:
+      devices:
+        schalter_2A: "{{ FHEM.intertechno.devices['schalter_2A'] }}"
+        schalter_2B: "{{ FHEM.intertechno.devices['schalter_2B'] }}"
 
 
 HOMEBRIDGE:

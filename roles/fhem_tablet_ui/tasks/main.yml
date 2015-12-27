@@ -1,0 +1,10 @@
+---
+
+- name: Git Clone Fhem Tablet UI
+  git: repo=https://github.com/knowthelist/fhem-tablet-ui.git dest={{ _fhem_tablet_ui.install_dir }} update={{ _fhem_tablet_ui.update|default('no')|bool }}
+
+- debug: var=_fhem_tablet_ui.rooms.Wohnzimmer.devices
+
+- name: Create UI
+  template: src=index.html.j2 dest={{ _fhem_tablet_ui.install_dir }}/www/tablet/index.html owner=root group=root mode=0644
+

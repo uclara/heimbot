@@ -30,6 +30,8 @@ attr WEB sortRooms Flur Arbeitszimmer Wohnzimmer
 attr WEB roomIcons Flur:scene_summerhouse Wohnzimmer:scene_livingroom Arbeitszimmer:scene_workshop
 attr WEB group Licht
 
+define TABLETUI HTTPSRV tablet /opt/fhem-tablet-ui/www/tablet Tablet-UI
+
 # Fake FileLog entry, to access the fhem log from FHEMWEB
 define autocreate autocreate
 attr autocreate filelog ./log/%NAME-%Y-%m.log
@@ -61,19 +63,19 @@ attr CUL_433 icon cul_cul
 #
 # genericDeviceType setzt den Gerätetypen für Homebridge / HomeKit -- cf. http://forum.fhem.de/index.php/topic,32652.msg377941.html#msg377941
 #
-{% for s in _fhem.intertechno.devices %}
+{% for (name, s) in _fhem.intertechno.devices|dictsort %}
 # ------------------------
-define {{ s.name }} IT {{ s.code }}  FF F0
-attr {{ s.name }} userattr room_map structexclude
-attr {{ s.name }} IODev CUL_433
+define {{ name }} IT {{ s.code }}  FF F0
+attr {{ name }} userattr room_map structexclude
+attr {{ name }} IODev CUL_433
 {% if s.alias is defined %}
-attr {{ s.name }} alias {{ s.alias }}
+attr {{ name }} alias {{ s.alias }}
 {% endif %}
-attr {{ s.name }} genericDeviceType {{ s.gen_type }}
-attr {{ s.name }} group {{ s.group }}
-attr {{ s.name }} icon {{ s.icon|default("light_light") }}
-attr {{ s.name }} model itswitch
-attr {{ s.name }} room {{ s.rooms|join(',') }},IT
+attr {{ name }} genericDeviceType {{ s.gen_type }}
+attr {{ name }} group {{ s.group }}
+attr {{ name }} icon {{ s.icon|default("light_light") }}
+attr {{ name }} model itswitch
+attr {{ name }} room {{ s.rooms|join(',') }},IT
 # ------------------------
 
 {% endfor %}
@@ -88,48 +90,48 @@ define ActionDetector CUL_HM 000000
 attr ActionDetector event-on-change-reading .*
 attr ActionDetector model ActionDetector
 
-{% for d in _fhem.homematic.devices %}
+{% for (name, d) in _fhem.homematic.devices|dictsort %}
 # ------------------------
-define {{ d.name }} CUL_HM {{ d.address }}
-attr {{ d.name }} serialNr {{ d.serialNr }}
-attr {{ d.name }} subType {{ d.subType }}
-attr {{ d.name }} IODev {{ d.IODev }}
-attr {{ d.name }} actCycle {{ d.actCycle }}
-attr {{ d.name }} actStatus {{ d.actStatus }}
-attr {{ d.name }} autoReadReg {{ d.autoReadReg }}
-attr {{ d.name }} expert {{ d.expert }}
-attr {{ d.name }} firmware {{ d.firmware }}
-attr {{ d.name }} model {{ d.model }}
-attr {{ d.name }} room hidden
-attr {{ d.name }} webCmd {{ d.webCmd }}
+define {{ name }} CUL_HM {{ d.address }}
+attr {{ name }} serialNr {{ d.serialNr }}
+attr {{ name }} subType {{ d.subType }}
+attr {{ name }} IODev {{ d.IODev }}
+attr {{ name }} actCycle {{ d.actCycle }}
+attr {{ name }} actStatus {{ d.actStatus }}
+attr {{ name }} autoReadReg {{ d.autoReadReg }}
+attr {{ name }} expert {{ d.expert }}
+attr {{ name }} firmware {{ d.firmware }}
+attr {{ name }} model {{ d.model }}
+attr {{ name }} room hidden
+attr {{ name }} webCmd {{ d.webCmd }}
 {% if d.alias is defined %}
-attr {{ d.name }} alias {{ d.alias }}
+attr {{ name }} alias {{ d.alias }}
 {% endif %}
 
-define FileLog_{{ d.address }} FileLog ./log/{{ d.address }}-%Y-%m.log {{ d.name }}
+define FileLog_{{ d.address }} FileLog ./log/{{ d.address }}-%Y-%m.log {{ name }}
 attr FileLog_{{ d.address }} logtype text
 attr FileLog_{{ d.address }} room hidden
 
 {% for c in d.channels %}
-define {{ d.name }}_{{ c.name }} CUL_HM {{ d.address }}{{ "%02d"|format(c.channel) }}
-attr {{ d.name }}_{{ c.name }} model {{ d.model }}
+define {{ name }}_{{ c.name }} CUL_HM {{ d.address }}{{ "%02d"|format(c.channel) }}
+attr {{ name }}_{{ c.name }} model {{ d.model }}
 {% if c.subType is defined %}
-attr {{ d.name }}_{{ c.name }} subType {{ c.subType }}
+attr {{ name }}_{{ c.name }} subType {{ c.subType }}
 {% endif %}
 {% if c.alias is defined %}
-attr {{ d.name }}_{{ c.name }} alias {{ c.alias }}
+attr {{ name }}_{{ c.name }} alias {{ c.alias }}
 {% endif %}
 {% if c.group is defined %}
-attr {{ d.name }}_{{ c.name }} group {{ c.group }}
+attr {{ name }}_{{ c.name }} group {{ c.group }}
 {% endif %}
 {% if c.gen_type is defined %}
-attr {{ d.name }}_{{ c.name }} genericDeviceType {{ c.gen_type }}
+attr {{ name }}_{{ c.name }} genericDeviceType {{ c.gen_type }}
 {% endif %}
 {% if c.icon is defined %}
-attr {{ d.name }}_{{ c.name }} icon {{ c.icon }}
+attr {{ name }}_{{ c.name }} icon {{ c.icon }}
 {% endif %}
-attr {{ d.name }}_{{ c.name }} peerIDs 00000000,
-attr {{ d.name }}_{{ c.name }} room {{ c.rooms|join(',') }},HomeMatic
+attr {{ name }}_{{ c.name }} peerIDs 00000000,
+attr {{ name }}_{{ c.name }} room {{ c.rooms|join(',') }},HomeMatic
 {% endfor %}
 # ------------------------
 
