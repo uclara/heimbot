@@ -19,7 +19,7 @@ attr global userattr cmdIcon devStateIcon devStateStyle fm_type icon room_map so
 define telnetPort telnet 7072 global
 attr telnetPort globalpassword {{ _fhem.security.telnet.password }}
 attr telnetPort password {{ _fhem.security.telnet.password }}
-attr telnetPort allowfrom 192\.168\.192\.[0-9]{3}
+attr telnetPort allowfrom 192\.168\.101\.[0-9]{3}
 
 define WEB FHEMWEB 8083 global
 attr WEB JavaScripts codemirror/fhem_codemirror.js
