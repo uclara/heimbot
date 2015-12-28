@@ -34,6 +34,21 @@ attr autocreate filelog ./log/%NAME-%Y-%m.log
 define eventTypes eventTypes ./log/eventTypes.txt
 
 # ========================
+# Sysstat
+# ========================
+
+define sysstat SYSSTAT 60 60
+attr sysstat filesystems /dev/mmcblk0p1,/dev/mmcblk0p2
+attr sysstat showpercent 1
+attr sysstat raspberrytemperature 1
+attr sysstat uptime 1
+attr sysstat room System
+define sysstatlog FileLog ./log/sysstat-%Y-%m.log sysstat
+attr sysstatlog nrarchive 1
+define SVG_sysstat SVG sysstatlog:sysstat:CURRENT
+attr SVG_sysstat label "Load Min: $data{min1}, Max: $data{max1}, Current: $data{currval1}"
+
+# ========================
 # IO DEVICES
 # ========================
 

@@ -16,6 +16,8 @@
     - make
     - dfu-programmer
     - fhem
+    - sysstat
+    - libsys-statistics-linux-perl
   register: installation_changed
 
 - name: Stop Fhem after Installation

@@ -58,7 +58,7 @@
 {% endfor %}
         </li>
 {% for (room, r) in _fhem_tablet_ui.rooms|dictsort %}
-        <li data-row="{{ loop.index + 1 }}" data-col="1" data-sizex="1" data-sizey="5">
+        <li data-row="1" data-col="{{ loop.index + 1 }}" data-sizex="1" data-sizey="5">
           <header>{{ room }}</header>
 {% for (name, d) in r.devices|dictsort %}
           <div data-type="switch" data-device="{{ name }}" data-get-on="on" data-get-off="off" class="cell" data-icon="{% if d.gen_type == 'light' %}fa-lightbulb-o{% else %}fa-power-off{% endif %}"></div>
@@ -66,6 +66,13 @@
 {% endfor %}
         </li>
 {% endfor %}
+        <li data-row="6" data-col="1" data-sizex="{{ _fhem_tablet_ui.rooms|dictsort|length + 2 }}" data-sizey="1">
+          <header>Information</header>
+          <div data-type="label" class="cell inline">Uptime, Load, Temperatur:</div>
+          <div data-type="label" data-device="sysstat" data-get="uptime" class="cell inline"></div>,
+          <div data-type="label" data-device="sysstat" data-get="state" class="cell inline"></div>,
+          <div data-type="label" data-device="sysstat" data-get="temperature" data-unit="%B0C%0A" class="cell inline"></div>
+        </li>
       </ul>
     </div>
   </body>
