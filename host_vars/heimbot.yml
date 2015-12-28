@@ -68,9 +68,12 @@ FHEM:
         rooms: [ hidden ]
       schalter_3A:
         code: 0000000F0F
-        group: Licht
-        gen_type: light
-        rooms: [ hidden ]
+        alias: Esel
+        group: Schalter
+        gen_type: switch
+        rooms:
+          - Arbeitszimmer
+          - Homekit
       schalter_3B:
         code: 0000F00F0F
         group: Licht
@@ -250,6 +253,9 @@ FHEM_TABLET_UI:
       devices:
         schalter_2A: "{{ FHEM.intertechno.devices['schalter_2A'] }}"
         schalter_2B: "{{ FHEM.intertechno.devices['schalter_2B'] }}"
+    Arbeitszimmer:
+      devices:
+        schalter_3A: "{{ FHEM.intertechno.devices['schalter_3A'] }}"
 
 
 HOMEBRIDGE:
