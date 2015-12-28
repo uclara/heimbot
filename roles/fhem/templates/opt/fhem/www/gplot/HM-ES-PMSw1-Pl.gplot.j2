@@ -1,0 +1,18 @@
+set terminal png transparent size <SIZE> crop
+set output '<OUT>.png'
+set xdata time
+set timefmt "%Y-%m-%d_%H:%M:%S"
+set xlabel " "
+set title '{{ item.value.title }}'
+set ytics
+set y2tics
+set grid
+set ylabel "Energy in Wh"
+set y2label "Power in Watt"
+
+#FileLog 4:{{ item.value.name }}_Power.energy\x3a::
+#FileLog 4:{{ item.value.name }}_Power.power\x3a::
+
+plot "<IN>" using 1:2 axes x1y1 title 'Energy' ls l0 lw 1 with lines,\
+     "<IN>" using 1:2 axes x1y2 title 'Power' ls l1 lw 1 with lines
+

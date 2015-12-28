@@ -21,6 +21,19 @@ FHEM:
           device_path: "/dev/{{ CUL.symlinks.433 }}"
         868:
           device_path: "/dev/{{ CUL.symlinks.868 }}"
+  plots:
+    3705C3:
+      name: schalter_HM1
+      title: "Papierleuchte am Esstisch"
+      template: HM-ES-PMSw1-Pl.gplot.j2
+    3705E8:
+      name: schalter_HM2
+      title: "Papierleuchte am Fernseher"
+      template: HM-ES-PMSw1-Pl.gplot.j2
+    37C3FD:
+      name: schalter_HM3
+      title: "Stehlampe"
+      template: HM-ES-PMSw1-Pl.gplot.j2
   intertechno:
     # siehe http://www.fhemwiki.de/wiki/Intertechno_Code_Berechnung
     devices:

@@ -103,7 +103,7 @@ attr {{ name }} webCmd {{ d.webCmd }}
 attr {{ name }} alias {{ d.alias }}
 {% endif %}
 
-define FileLog_{{ d.address }} FileLog ./log/{{ d.address }}-%Y-%m.log {{ name }}
+define FileLog_{{ d.address }} FileLog ./log/{{ d.address }}-%Y-%m.log {{ name }}|{{ name }}_Power:.*
 attr FileLog_{{ d.address }} logtype text
 attr FileLog_{{ d.address }} room hidden
 
@@ -130,6 +130,14 @@ attr {{ name }}_{{ c.name }} room {{ c.rooms|join(',') }},HomeMatic
 {% endfor %}
 # ------------------------
 
+{% endfor %}
+
+# ========================
+# Plots
+# ========================
+{% for (name, p) in _fhem.plots|dictsort %}
+define SVG_{{ name }} SVG FileLog_{{ name }}:{{ name }}:CURRENT
+attr SVG_{{ name }} room Plots
 {% endfor %}
 
 

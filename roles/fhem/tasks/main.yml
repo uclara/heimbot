@@ -30,7 +30,11 @@
   notify:
     - Restart Fhem
 
-- name: Generate Fhem Configuration
+- name: Create GNUplot Files
+  template: src='opt/fhem/www/gplot/{{ item.value.template }}' dest='/opt/fhem/www/gplot/{{ item.key }}.gplot' owner=fhem group=dialout mode=0600
+  with_dict: "{{ _fhem.plots }}"
+
+- name: Create Fhem Configuration
   template: src='{{ item }}.j2' dest='/{{ item }}' owner=fhem group=dialout mode=0600
   with_items:
     - opt/fhem/fhem.cfg
