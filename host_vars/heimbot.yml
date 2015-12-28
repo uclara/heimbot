@@ -24,15 +24,15 @@ FHEM:
   plots:
     3705C3:
       name: schalter_HM1
-      title: "Papierleuchte am Esstisch"
+      title: "Papierleuchte am Esstisch - $data{currval1} Wh, $data{currval2} Watt"
       template: HM-ES-PMSw1-Pl.gplot.j2
     3705E8:
       name: schalter_HM2
-      title: "Papierleuchte am Fernseher"
+      title: "Papierleuchte am Fernseher - $data{currval1} Wh, $data{currval2} Watt"
       template: HM-ES-PMSw1-Pl.gplot.j2
     37C3FD:
       name: schalter_HM3
-      title: "Stehlampe"
+      title: "Stehlampe - $data{currval1} Wh, $data{currval2} Watt"
       template: HM-ES-PMSw1-Pl.gplot.j2
   intertechno:
     # siehe http://www.fhemwiki.de/wiki/Intertechno_Code_Berechnung

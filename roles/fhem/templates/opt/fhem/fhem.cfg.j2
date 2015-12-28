@@ -38,7 +38,7 @@ define eventTypes eventTypes ./log/eventTypes.txt
 # ========================
 
 define sysstat SYSSTAT 60 60
-attr sysstat filesystems /dev/mmcblk0p1,/dev/mmcblk0p2
+attr sysstat filesystems /dev/mmcblk0p1,/dev/root
 attr sysstat showpercent 1
 attr sysstat raspberrytemperature 1
 attr sysstat uptime 1
@@ -47,6 +47,7 @@ define sysstatlog FileLog ./log/sysstat-%Y-%m.log sysstat
 attr sysstatlog nrarchive 1
 define SVG_sysstat SVG sysstatlog:sysstat:CURRENT
 attr SVG_sysstat label "Load Min: $data{min1}, Max: $data{max1}, Current: $data{currval1}"
+attr SVG_sysstat room System,Plots
 
 # ========================
 # IO DEVICES
@@ -152,6 +153,7 @@ attr {{ name }}_{{ c.name }} room {{ c.rooms|join(',') }},HomeMatic
 # ========================
 {% for (name, p) in _fhem.plots|dictsort %}
 define SVG_{{ name }} SVG FileLog_{{ name }}:{{ name }}:CURRENT
+attr SVG_{{ name }} label "{{ p.title }}"
 attr SVG_{{ name }} room Plots
 {% endfor %}
 
