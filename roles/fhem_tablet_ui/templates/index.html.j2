@@ -28,12 +28,41 @@
 
     <div class="gridster">
       <ul>
+        <li data-row="1" data-col="1" data-sizex="2" data-sizey="5">
+          <header>Wetter Köln</header>
+          <div class="container row">
+            <div data-type="label" class="cell large left">Heute</div>
+            <div data-type="weather" data-device="wetter_koeln" data-get="condition" class="cell big"></div>
+            <div class="cell left">
+              <div data-type="label">Temperatur</div>
+              <div data-type="label">Luftfeuchte</div>
+            </div>
+            <div class="cell right">
+              <div data-type="label" data-device="wetter_waidmarkt" data-get="temperature" data-unit="%B0C%0A"></div>
+              <div data-type="label" data-device="wetter_waidmarkt" data-get="humidity" data-unit="%"></div>
+            </div>
+          </div>
+{% for i in [2, 3, 4, 5] %}
+          <div class="container row">
+            <div data-type="label" data-device="wetter_koeln" data-get="fc{{ i }}_day_of_week" class="cell large left"></div>
+            <div data-type="weather" data-device="wetter_koeln" data-get="fc{{ i }}_condition" class="cell big"></div>
+            <div class="cell left">
+              <div data-type="label">Tief</div>
+              <div data-type="label">Hoch</div>
+            </div>
+            <div class="cell right">
+              <div data-type="label" data-device="wetter_koeln" data-get="fc{{ i }}_low_c" data-unit="%B0C%0A" class="align-left"></div>
+              <div data-type="label" data-device="wetter_koeln" data-get="fc{{ i }}_high_c" data-unit="%B0C%0A" class="align-left"></div>
+            </div>
+          </div>
+{% endfor %}
+        </li>
 {% for (room, r) in _fhem_tablet_ui.rooms|dictsort %}
-        <li data-row="1" data-col="1" data-sizex="1" data-sizey="5">
+        <li data-row="{{ loop.index + 1 }}" data-col="1" data-sizex="1" data-sizey="5">
           <header>{{ room }}</header>
 {% for (name, d) in r.devices|dictsort %}
-          <div data-type="switch" data-device="{{ name }}" data-get-on="on" data-get-off="off" class="cell" data-icon="{% if d.gen_type == "light" %}fa-lightbulb-o{% else %}fa-power-off{% endif %}"></div>
-          <div data-type="label" class="cell">{{ d.alias }}</div>
+          <div data-type="switch" data-device="{{ name }}" data-get-on="on" data-get-off="off" class="cell" data-icon="{% if d.gen_type == 'light' %}fa-lightbulb-o{% else %}fa-power-off{% endif %}"></div>
+          <div data-type="label" class="cell top-narrow">{{ d.alias }}</div>
 {% endfor %}
         </li>
 {% endfor %}

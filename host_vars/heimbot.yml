@@ -202,6 +202,35 @@ FHEM:
     attr Fernseher devStateIcon .*on:audio_volume_high .*off:audio_volume_mute .*:unknown
     attr Fernseher room Wohnzimmer
     attr Fernseher webCmd mute on:mute off
+    # ========================
+    # Wetter -- Yahoo, Köln
+    # ========================
+    #
+    define wetter_koeln Weather 20066502 600 de
+    attr wetter_koeln room Wettervorhersage
+    define FileLog_wetter_koeln FileLog ./log/meinwetter-%Y-%m.log wetter_koeln
+    attr FileLog_wetter_koeln logtype text
+    attr FileLog_wetter_koeln room Wettervorhersage
+    define weblink_meinwetter weblink htmlCode {WeatherAsHtml("wetter_koeln")}
+    attr weblink_meinwetter room Wettervorhersage
+    # ========================
+    # Wetter -- Wunderground, Waidmarkt
+    # ========================
+    #
+    define wetter_waidmarkt HTTPMOD http://api.wunderground.com/weatherstation/WXCurrentObXML.asp?ID=IKLN797 600
+    attr wetter_waidmarkt room Wettervorhersage
+    attr wetter_waidmarkt userattr readingsName_date readingsName_dewpointTemperature readingsName_humidity readingsName_pressure readingsName_temperature readingsName_time readingsRegex_date readingsRegex_dewpointTemperature readingsRegex_humidity readingsRegex_pressure readingsRegex_temperature
+    attr wetter_waidmarkt readingsName_date date
+    attr wetter_waidmarkt readingsName_dewpointTemperature dewpointTemperature
+    attr wetter_waidmarkt readingsName_humidity humidity
+    attr wetter_waidmarkt readingsName_pressure pressure
+    attr wetter_waidmarkt readingsName_temperature temperature
+    attr wetter_waidmarkt readingsRegex_date date <observation_time_rfc822>(.+)</observation_time_rfc822>
+    attr wetter_waidmarkt readingsRegex_dewpointTemperature <dewpoint_c>([\d\.]+)
+    attr wetter_waidmarkt readingsRegex_humidity <relative_humidity>([\d\.]+)
+    attr wetter_waidmarkt readingsRegex_pressure <pressure_mb>([\d\.]+)
+    attr wetter_waidmarkt readingsRegex_solarUV <UV>([\d\.]+)
+    attr wetter_waidmarkt readingsRegex_temperature <temp_c>([\d\.]+)
   end:
 
 
