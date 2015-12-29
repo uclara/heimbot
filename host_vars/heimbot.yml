@@ -316,6 +316,12 @@ NETWORKING:
         package: firmware-ralink
 
 
+OPS_TOOLS:
+  tools:
+    - sysstat
+    - iotop
+
+
 UDEV:
   rule_files:
     - name: 99-busware.rules

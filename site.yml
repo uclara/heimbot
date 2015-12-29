@@ -5,6 +5,7 @@
     - vars/secrets.yml
   roles:
     - { role: base, tags: [ 'base' ], _base: "{{ BASE }}" }
+    - { role: ops_tools, tags: [ 'ops_tools' ], _ops_tools: "{{ OPS_TOOLS }}" }
     - { role: networking, tags: [ 'networking' ], _networking: "{{ NETWORKING }}" }
     - { role: udev, tags: [ 'udev' ], _udev: "{{ UDEV }}" }
     - { role: fhem, tags: [ 'fhem' ], _fhem: "{{ FHEM }}" }
