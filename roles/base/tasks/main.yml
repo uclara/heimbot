@@ -18,3 +18,9 @@
 - name: Reconfigure tzdata
   command: dpkg-reconfigure --frontend noninteractive tzdata
 
+- name: Set locale
+  lineinfile: dest=/etc/locale.gen regexp="^# de_DE.UTF-8" line="de_DE.UTF-8 UTF-8"
+
+- name: Generate locales
+  command: locale-gen
+
