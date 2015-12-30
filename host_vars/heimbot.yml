@@ -1,5 +1,26 @@
 ---
 
+APACHE:
+  use_default_config: False
+  listen:
+    - { ip: 0.0.0.0, port: 80 }
+  modules:
+    disable: []
+    enable: []
+  sites:
+    - name: heimbot
+      enabled: True
+      vhost: 0.0.0.0
+      port: 80
+      document_root: /var/www/heimbot
+      server_admin: info@heimbot
+      extra: |+
+        <Directory "/var/www/heimbot">
+            AllowOverride All
+            Require all granted
+        </Directory>
+
+
 CUL:
   symlinks:
     433: CUL433
@@ -330,4 +351,6 @@ UDEV:
         - 'SUBSYSTEM=="tty", ATTRS{idProduct}=="204b", ATTRS{idVendor}=="03eb", ATTRS{product}=="CUL868", SYMLINK+="{{ CUL.symlinks.868 }}"'
   vendors:
     - 03eb
+
+
 

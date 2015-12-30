@@ -11,4 +11,5 @@
     - { role: fhem, tags: [ 'fhem' ], _fhem: "{{ FHEM }}" }
     - { role: fhem_tablet_ui, tags: [ 'fhem_tablet_ui' ], _fhem_tablet_ui: "{{ FHEM_TABLET_UI }}" }
     - { role: homebridge, tags: [ 'homebridge' ], _homebridge: "{{ HOMEBRIDGE}}" }
+    - { role: apache, tags: ['apache'], _apache: "{{ APACHE }}" }
 
