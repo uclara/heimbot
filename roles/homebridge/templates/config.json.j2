@@ -1,7 +1,7 @@
 {
     "bridge": {
         "name": "Homebridge",
-        "username": "{{ _homebridge.security.username }}",
+        "username": "{{ _homebridge.security.username|upper }}",
         "port": 51826,
         "pin": "{{ _homebridge.security.pin }}"
     },
