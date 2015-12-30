@@ -64,6 +64,7 @@
 
 ## 2. Automatic Steps using Ansible
 
+The automatic setup is carried out [Ansible](https://github.com/ansible/ansible) version 2.0+. Please make sure you have installed Ansible in version 2.0+. See [Ansible Installation](http://docs.ansible.com/ansible/intro_installation.html#running-from-source) for details.
 
 ### 2.1. Bootstrap
 
