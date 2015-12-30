@@ -13,7 +13,13 @@ BASE:
     - git
 
 UNIX_USERS:
+  groups:
+    - { name: adm, system: yes }
+  sudo:
+    group: adm
+  users:
   - name: lukas
+    comment: Lukas
     groups:
       - adm
     shell: /usr/bin/zsh

@@ -1,3 +1,7 @@
 - src: lukaspustina.ops_tools
   name: ops_tools
 
+- src: lukaspustina.unix_users
+  version: v0.1.0
+  name: unix_users
+
