@@ -1,0 +1,12 @@
+---
+
+- name: Create Web Content Directory
+  file: path={{ _webcontent.destination_directory }} state=directory owner={{ _webcontent.owner }} group={{ _webcontent.group }} mode=0750
+
+- name: Copy Static Web Content
+  copy: src=webcontent/ dest={{ _webcontent.destination_directory }} owner={{ _webcontent.owner }} group={{ _webcontent.group }} directory_mode=0750 mode=0640
+
+- name: Create Web Content
+  template: src=webcontent/{{ item }}.j2 dest={{ _webcontent.destination_directory }}/{{ item }} owner={{ _webcontent.owner }} group={{ _webcontent.group }} mode=0640
+  with_items: _webcontent.templates
+

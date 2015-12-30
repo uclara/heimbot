@@ -353,4 +353,9 @@ UDEV:
     - 03eb
 
 
-
+WEBCONTENT:
+  destination_directory: "{{ APACHE.sites[0].document_root }}"
+  owner: www-data
+  group: www-data
+  templates:
+    index.html

@@ -1,0 +1,257 @@
+@font-face {
+    font-family: 'Lato';
+    src: url('lato/lato-regular-webfont.eot');
+    src: url('lato/lato-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('lato/lato-regular-webfont.woff2') format('woff2'),
+         url('lato/lato-regular-webfont.woff') format('woff'),
+         url('lato/lato-regular-webfont.ttf') format('truetype'),
+         url('lato/lato-regular-webfont.svg#latoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+  color: #555;
+  font-weight: normal;
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+  line-height: 32px;
+  font-size: 18px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #333;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+h2 {
+  margin-top: 50px;
+  font-size: 45px;
+}
+
+h3 {
+  font-size: 35px;
+  color: #777;
+  margin-top: 40px;
+}
+
+h4 {
+  font-size: 25px;
+  color: #777;
+  margin-top: 40px;
+}
+
+
+.container h3 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+a {
+  color: #3e94db;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.box {
+  background-color: white;
+  padding: 30px;
+  overflow: hidden;
+  border-radius: 5px;
+  border: 1px solid #f2f2f2;
+  margin-top: 25px;
+}
+
+.reload_settings_wrapper {
+  position: fixed;
+  width: 100%;
+  top: 35px;
+}
+
+.reload_settings {
+  margin-top: 0px;
+  padding: 20px;
+  color: #777;
+  padding-bottom: 20px;
+  display: inline-block;
+  margin-right: 70px;
+  box-shadow: 0px 0px 30px #eee;
+}
+
+.header {
+  background-color: white;
+  display: inline-block;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 5px;
+  border: 1px solid #f2f2f2;
+}
+
+.header img {
+  vertical-align: middle;
+  margin-right: 15px;
+}
+
+html, body {
+  font-family: 'Lato', sans-serif;
+  background-color: #f6f6f6;
+}
+
+ul {
+  margin-top: 0px;
+  list-style: disc;
+  padding-left: 20px;
+}
+
+#wrapper {
+  padding: 35px;
+}
+
+.container_wrapper {
+  border-radius: 3px;
+  background-color: white;
+  padding: 20px;
+  font-size: 20px;
+  margin-right: 25px;
+}
+
+.last .container_wrapper {
+  margin-right: 0px;
+}
+
+.container_wrapper > h3 {
+  margin-top: 0px;
+}
+
+.container_wrapper > h3,
+.container_wrapper > h3 * {
+  color: #3e94db;
+}
+
+.container_wrapper ul,
+.container_wrapper li {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+
+.container_wrapper > .section {
+  font-style: italic;
+  color: #888;
+}
+
+.container_wrapper li i {
+  margin-right: 5px;
+}
+
+.container_wrapper > ul > ul {
+  margin-left: 20px;
+}
+.container_wrapper ul > ul {
+  font-weight: normal;
+  margin-left:30px;
+}
+
+.buttons {
+  margin: 0px;
+  padding: 0px;
+  display: block;
+  list-style: none;
+}
+
+.buttons > li {
+  display: inline-block;
+  list-style: none;
+  margin-right: 20px;
+  line-height: 55px;
+}
+
+.buttons > li > a {
+  color: white;
+  background-color: #e07742;
+  padding: 15px 20px;
+  border-radius: 3px;
+  font-size: 18px;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+.buttons > li > a > i {
+  color: white;
+  margin-right: 5px;
+}
+
+.buttons > li > a:hover {
+  text-decoration: none;
+  background-color: #c7643b;
+}
+
+.container * {
+  color: #555;
+}
+
+.table {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.cell {
+  display: table-cell;
+  text-align: left;
+}
+
+th {
+    padding-bottom: 20px;
+    font-size: 28px;
+}
+
+td {
+  padding-right: 20px;
+  padding-left: 20px;
+  text-align: center;
+  font-size: 24px;
+  color: #3e94db;
+}
+
+ul.intent {
+  margin-left: 20px;
+  margin-bottom:10px;
+}
+
+@media (max-width: 50em) {
+  h2, h3 {
+    text-align: center;
+  }
+  .container_wrapper {
+    margin-right: 0px;
+  }
+  .cell {
+    display: block;
+    margin-bottom: 25px;
+  }
+
+  .container_wrapper li {
+    line-height: 70px;
+    font-size: 30px;
+  }
+  .buttons > li {
+    display: block;
+    margin-bottom: 10px;
+  }
+  .buttons > li > a {
+    text-align: center;
+    display: block;
+    font-size: 30px;
+    line-height: 80px;
+  }
+}
