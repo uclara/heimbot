@@ -20,7 +20,7 @@
 
     There is a backup copy of the latest Minibian I'm running in [CenterDevice](https://public.centerdevice.de/c9c6437e-35b8-4589-bf8a-7447891743a9). Please prefer to download Minibian from the original source.
 
-1. Write Image to SD card -- cf. [eLinux Max Os X How-To](http://elinux.org/RPi_Easy_SD_Card_Setup#Using_command_line_tools_.282.29)
+1. Write Image to SD card -- cf. [eLinux OS X How-To](http://elinux.org/RPi_Easy_SD_Card_Setup#Using_command_line_tools_.282.29)
 
     1. `diskutil list`
 
@@ -70,11 +70,13 @@ The automatic setup is carried out [Ansible](https://github.com/ansible/ansible)
 
 ### 2.1. Bootstrap
 
-1. Adapt `ansible.cfg` to your installation
+1. Adapt `ansible.cfg` to your installation.
 
-1. Run bootstrapping
+1. Adapt `host_vars/heimbot.yml` to your needs; especially regarding password, network names, and Fhem controlled devices.
 
-    `ansible-playbook -u root -k bootstrap.yml`
+     1. Replace my Ansible vault `vars/secrets.yml` with your own passwords. You can run `grep ' S_' host_vars/heimbot.yml` to get all the variable names to replace.
+
+1. Run bootstrapping: `ansible-playbook -u root -k bootstrap.yml`.
 
 ### 2.2 Set Up Services
 
