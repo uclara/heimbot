@@ -2,5 +2,7 @@ auto lo
 iface lo inet loopback
 
 {% for if in _networking.interfaces %}
+{% if if.active %}
 {{ if.config }}
+{% endif %}
 {% endfor %}

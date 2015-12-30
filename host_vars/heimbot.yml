@@ -321,10 +321,12 @@ NETWORKING:
   use_wifi: Yes
   interfaces:
     - name: eth0
+      active: Yes
       config: |+
         auto eth0
         iface eth0 inet dhcp
     - name: wlan0
+      active: No
       config: |+
         allow-hotplug wlan0
         iface wlan0 inet manual
