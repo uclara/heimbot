@@ -18,6 +18,8 @@
 
 1. Download [Minibian](https://minibianpi.wordpress.com/download/)
 
+    There is a backup copy of the latest Minibian I'm running in [CenterDevice](https://public.centerdevice.de/c9c6437e-35b8-4589-bf8a-7447891743a9). Please prefer to download Minibian from the original source.
+
 1. Write Image to SD card -- cf. [eLinux Max Os X How-To](http://elinux.org/RPi_Easy_SD_Card_Setup#Using_command_line_tools_.282.29)
 
     1. `diskutil list`
