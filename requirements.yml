@@ -14,3 +14,7 @@
   version: v0.1.1
   name: motd
 
+- src: lukaspustina.haproxy
+  version: v0.1.0
+  name: haproxy
+

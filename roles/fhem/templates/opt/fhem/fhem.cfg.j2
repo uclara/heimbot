@@ -16,9 +16,9 @@ attr global userattr cmdIcon devStateIcon devStateStyle fm_type icon room_map so
 # APIs and GUIs
 # ========================
 
-define WEB FHEMWEB 8083 global
+define WEB FHEMWEB 8083
 attr WEB JavaScripts codemirror/fhem_codemirror.js
-attr WEB basicAuth {{ (_fhem.security.web.user ~ ":" ~ _fhem.security.web.password) | b64encode }}
+# HAProxy takes care to this # attr WEB basicAuth {{ (_fhem.security.web.user ~ ":" ~ _fhem.security.web.password) | b64encode }}
 attr WEB codemirrorParam { "theme":"blackboard", "lineNumbers":true }
 attr WEB stylesheetPrefix dark
 attr WEB sortRooms Flur Arbeitszimmer Wohnzimmer

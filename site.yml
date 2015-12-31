@@ -14,4 +14,5 @@
     - { role: homebridge, tags: [ 'homebridge' ], _homebridge: "{{ HOMEBRIDGE}}" }
     - { role: apache, tags: ['apache'], _apache: "{{ APACHE }}" }
     - { role: webcontent, tags: ['webcontent'], _webcontent: "{{ WEBCONTENT }}" }
+    - { role: haproxy, tags: ['haproxy'], _haproxy: "{{ HAPROXY }}" }
 
