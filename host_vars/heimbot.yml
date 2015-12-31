@@ -317,6 +317,15 @@ HOMEBRIDGE:
     download_url: https://nodejs.org/dist/v4.2.3/node-v4.2.3-linux-armv7l.tar.gz
 
 
+MOTD:
+  services:
+    command: 'systemctl status @@NAME@@ | sed -ne "/service -\|Active/ p" | sed -e "N;s/\n / /" -e "s/^\(.*\).service.*Active: \(.*\)/\1: \2/"'
+    services:
+      - apache2
+      - fhem
+      - homebridge
+
+
 NETWORKING:
   use_wifi: Yes
   interfaces:
