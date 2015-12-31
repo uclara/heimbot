@@ -185,5 +185,5 @@ Things can go wrong or stop working. Try these steps to fix things.
 
     1. Reassign HomeBridge's username and clear persistent data. This requires to recreate your HomeKit configuration.
 
-    1. Delete HomeKit from _all_ your iOS devices and then follow the step above. If you use an Apple~TV unplug it first and only plug it in _after_ you set up HomeKit successfully again.
+    1. Delete HomeKit from _all_ your iOS devices and then follow the step above. If you use an Apple&nbsp;TV unplug it first and only plug it in _after_ you set up HomeKit successfully again.
 
