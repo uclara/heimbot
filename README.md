@@ -17,6 +17,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+
 ## 1. Initial Manual Steps
 
 1. Download [Minibian](https://minibianpi.wordpress.com/download/)
@@ -66,6 +67,7 @@
 1. Install Python
 
 1. In case the CUL USB transmitter are not yet flushed please see CUL Flushing
+
 
 ## 2. Automatic Steps using Ansible
 
