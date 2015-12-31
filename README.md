@@ -1,9 +1,31 @@
 # heimbot
 
+*heimbot* is Raspberry Pi based, Linux driven server that allows you to run Fhem and HomeKit Home Automatization. [Fhem](http://fhem.de) bridges home automatization equipment from different vendors in one single application. Together with [HomeBridge](https://github.com/nfarina/homebridge) Fhem behaves like a Apple HomeKit accessor giving you access to all your home automatization equipment via iOS devices and even Siri.
+
+*heimbot* originates in my endeavor to set up Home Automatization at my place. It is driven almost entirely by Ansible [Ansible](http://www.ansible.com) which allows for an automatic setup without the need to manually install software and edit configuration files. In this way, the setup is easily reproducable and it is simple to adapt to your own place.
+
+*heimbot* installs and configures the following services
+
+* Fhem
+
+* HomeBridge
+
+* Apache for static web content
+
+* HAProxy to centrally secure all relevant traffic with SSL
+
+* IPtables for port based firewalling
+
+* and some other tools like a dynamic motd and ops tools.
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
+- [0. General Outline of Installing Heimbot](#0-general-outline-of-installing-heimbot)
+  - [0.1 What You Need](#01-what-you-need)
+  - [0.2 What You Do](#02-what-you-do)
+  - [0.3 What You may Adapt](#03-what-you-may-adapt)
 - [1. Initial Manual Steps](#1-initial-manual-steps)
 - [2. Automatic Steps using Ansible](#2-automatic-steps-using-ansible)
   - [2.1. Bootstrap](#21-bootstrap)
@@ -14,8 +36,47 @@
 - [4. CUL Flushing](#4-cul-flushing)
 - [5. Trouble Shooting](#5-trouble-shooting)
   - [5.1 HomeBridge](#51-homebridge)
+- [6. Appendix](#6-appendix)
+  - [6.1 Example for `vars/secrets.yml`](#61-example-for-varssecretsyml)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+
+## 0. General Outline of Installing Heimbot
+
+### 0.1 What You Need
+
+* Raspberry Pi
+
+* CUL USB sticks for 433 and 868 Mhz radio transmission
+
+* A self signing Certificate Authority -- cf. [OpenSSL Certificate Authority](https://jamielinux.com/docs/openssl-certificate-authority/index.html) for details steps.
+
+### 0.2 What You Do
+
+1. Fork this repository
+
+1. Adapt `host_vars/heimbot.yml`
+
+1. Replace `vars/secrets.yml`
+
+1. Run the initial manual steps
+
+1. Bootstrap your Raspberry Pi with Ansible
+
+1. Setup all servies with Ansible
+
+### 0.3 What You may Adapt
+
+Apart from the above mentioned adaptions you can also modify some parts to your needs.
+
+1. Fhem controlled devices
+
+    I use Intertechno and HomeMatic devices. In order to modify and extend my configure, adapt the variable `FHEM` in `host_vars/heimbot.yml` and the corresponding `fhem.cfg` template in the `fhem` role.
+
+1. Fhem Tablet UI
+
+    See the `webcontent` role.
 
 
 ## 1. Initial Manual Steps
@@ -79,7 +140,7 @@ The automatic setup is carried out [Ansible](https://github.com/ansible/ansible)
 
 1. Adapt `host_vars/heimbot.yml` to your needs; especially regarding password, network names, and Fhem controlled devices.
 
-     1. Replace my Ansible vault `vars/secrets.yml` with your own passwords. You can run `grep ' S_' host_vars/heimbot.yml` to get all the variable names to replace.
+     1. Replace my Ansible vault `vars/secrets.yml` with your own passwords. You can run `grep ' S_' host_vars/heimbot.yml` to get all the variable names to replace. There is an [example](#61-example-for-varssecretsyml) in the Appendix.
 
 1. Run bootstrapping: `ansible-playbook -u root -k bootstrap.yml`.
 
@@ -186,4 +247,33 @@ Things can go wrong or stop working. Try these steps to fix things.
     1. Reassign HomeBridge's username and clear persistent data. This requires to recreate your HomeKit configuration.
 
     1. Delete HomeKit from _all_ your iOS devices and then follow the step above. If you use an Apple&nbsp;TV unplug it first and only plug it in _after_ you set up HomeKit successfully again.
+
+
+## 6. Appendix
+
+### 6.1 Example for `vars/secrets.yml`
+
+```
+S_FHEM:
+  security:
+    telnet:
+      password: NipzMJm9rpJ9dnHbzikc8i9H
+    web:
+      password: CdC2ZUXMRsn2T4Pke7DYUzpz
+  homematic:
+    hmId: 104A6F
+
+S_HOMEBRIDGE:
+  security:
+    username: 10:4a:59:06:71:3a
+    pin: 141-42-135
+
+
+S_NETWORKING:
+  wifi:
+    pdt_01:
+      password: G3sch1rrsp0hl3r!W
+    pdt_02:
+      password: G3sch1rrsp0hl3r!W
+```
 
