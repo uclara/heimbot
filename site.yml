@@ -7,7 +7,9 @@
     - { role: base, tags: [ 'base' ], _base: "{{ BASE }}" }
     - { role: ops_tools, tags: [ 'ops_tools' ], _ops_tools: "{{ OPS_TOOLS }}" }
     - { role: networking, tags: [ 'networking' ], _networking: "{{ NETWORKING }}" }
+    - { role: iptables, tags: ['iptables'], _iptables: "{{ IPTABLES }}" }
     - { role: motd, tags: [ 'motd' ], _motd: "{{ MOTD }}" }
+
     - { role: udev, tags: [ 'udev' ], _udev: "{{ UDEV }}" }
     - { role: fhem, tags: [ 'fhem' ], _fhem: "{{ FHEM }}" }
     - { role: fhem_tablet_ui, tags: [ 'fhem_tablet_ui' ], _fhem_tablet_ui: "{{ FHEM_TABLET_UI }}" }

@@ -405,6 +405,27 @@ HOMEBRIDGE:
     download_url: https://nodejs.org/dist/v4.2.3/node-v4.2.3-linux-armv7l.tar.gz
 
 
+IPTABLES:
+  default_policy:
+    incoming: reject
+  state: enabled
+  rules:
+    - interface: eth0
+      ip: "{{ ansible_eth0.ipv4.address }}"
+      ports:
+        - { name: ssh, port: 22, proto: tcp, direction=in, rule=allow, delete: no }
+        - { name: http, port: 80 }
+        - { name: https, port: 443 }
+        - { name: fhem, port: 8083 }
+        - { name: haproxy, port: 8404 }
+    - interface: eth0
+      ip: "{{ ansible_eth0.ipv6[0].address }}"
+      ports:
+        - { name: ssh, port: 22, proto: tcp, direction=in, rule=allow, delete: no }
+        - { name: homebridge, port: 8082 }
+        - { name: homebridge2, port: "51826" }
+        - { name: homebridge_data, port: "54826:54840" }
+
 MOTD:
   services:
     command: 'systemctl status @@NAME@@ | sed -ne "/service -\|Active/ p" | sed -e "N;s/\n / /" -e "s/^\(.*\).service.*Active: \(.*\)/\1: \2/"'

@@ -18,3 +18,7 @@
   version: v0.1.0
   name: haproxy
 
+- src: lukaspustina.iptables
+  version: v0.1.0
+  name: iptables
+
