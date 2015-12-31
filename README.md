@@ -8,9 +8,12 @@
 - [2. Automatic Steps using Ansible](#2-automatic-steps-using-ansible)
   - [2.1. Bootstrap](#21-bootstrap)
   - [2.2 Set Up Services](#22-set-up-services)
+    - [2.2.1 Role Parameters](#221-role-parameters)
 - [3. Teaching-in of Devices](#3-teaching-in-of-devices)
   - [3.1 HomeMatic](#31-homematic)
 - [4. CUL Flushing](#4-cul-flushing)
+- [5. Trouble Shooting](#5-trouble-shooting)
+  - [5.1 HomeBridge](#51-homebridge)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -82,13 +85,23 @@ The automatic setup is carried out [Ansible](https://github.com/ansible/ansible)
 
 `ansible-playbook site.yml`
 
-The site playbook supports a few parameters which you can pass via `--extra-vars "parameter=value"`:
+#### 2.2.1 Role Parameters
 
-* `apt_update=[True|False]` -- `base`: Updates Apt cache and runs an upgrade.
+The Ansible roles invoked by the site playbook support a few parameters which you can pass via `--extra-vars "parameter=value"`:
 
-* `clean_fhem_saved_state=[True|False]` -- `fhem`: Clears Fhem saved state.
+* `base`
 
-* `clean_homebridge_identifier_cache=[True|False]` -- `homebridge`: Clears Homebridge identifier cache and restarts homebridge.
+    * `apt_update=[True|False]` -- Updates Apt cache and runs an upgrade.
+
+* `fhem`
+
+    * `clean_fhem_saved_state=[True|False]` -- Clears Fhem saved state.
+
+* `homebridge`
+
+    * `clean_homebridge_identifier_cache=[True|False]` -- Clears Homebridge identifier cache and restarts homebridge.
+
+    * `clean_homebridge_persistent_data=[True|False]` -- Clears Homebridge persistent data and restarts homebridge.
 
 
 ## 3. Teaching-in of Devices
@@ -153,4 +166,22 @@ Usually, the CUL USB transmitter come without a firmware and need to be flashed 
 
 1. Repeat from step 3 for all CUL USB transmitters.
 
+
+## 5. Trouble Shooting
+
+Things can go wrong or stop working. Try these steps to fix things.
+
+### 5.1 HomeBridge
+
+1. HomeKit does not "see" HomeBridge anymore or worse, returns "Object not found".
+
+    There are different causes for this problem. The worst is when HomeKit somehow has stored HomeBridge's ID a.k.a. username in its database but the pairing did not complete. In the past, the followig steps worked for me. Please execute and re-try HomeKit one step after another in this order.
+
+    1. Clear HomeBridge's identifier cache -- see [2.2.1 Role Parameters](#221-role-parameters).
+
+    1. Clear HomeBridge's persistent data -- see [2.2.1 Role Parameters](#221-role-parameters).
+
+    1. Reassign HomeBridge's username and clear persistent data. This requires to recreate your HomeKit configuration.
+
+    1. Delete HomeKit from _all_ your iOS devices and then follow the step above. If you use an Apple~TV unplug it first and only plug it in _after_ you set up HomeKit successfully again.
 

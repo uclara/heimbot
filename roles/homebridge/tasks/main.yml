@@ -55,14 +55,21 @@
 - name: Create Homebridge config directory
   file: name=/home/homebridge/.homebridge state=directory mode=0750 owner=homebridge group=homebridge
 
-- name: Create Homebridge Config
-  template: src=config.json.j2 dest=/home/homebridge/.homebridge/config.json owner=homebridge group=homebridge mode=0640
-  notify:
-    - Reload Homebridge
-
 - name: Clean Homebridge Identifier Cache
   file: path=/home/homebridge/.homebridge/persist/IdentifierCache.{{ _homebridge.security.username|regex_replace(':', '')|upper }}.json state=absent
   notify:
     - Reload Homebridge
   when: clean_homebridge_identifier_cache|default(False)|bool
+
+- name: Clean Homebridge Persistent Data
+  file: path=/home/homebridge/.homebridge/persist/ state=absent
+  notify:
+    - Reload Homebridge
+  when: clean_homebridge_persistent_data|default(False)|bool
+
+- name: Create Homebridge Config
+  template: src=config.json.j2 dest=/home/homebridge/.homebridge/config.json owner=homebridge group=homebridge mode=0640
+  notify:
+    - Reload Homebridge
+
 
