@@ -20,7 +20,7 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+## Contents
 
 - [0. General Outline of Installing Heimbot](#0-general-outline-of-installing-heimbot)
   - [0.1 What You Need](#01-what-you-need)
