@@ -7,6 +7,9 @@
     - dfu-programmer
   when: _fhem.firware_flash_support
 
+- name: Add Fhem APT Repository Key
+  apt_key: url=https://debian.fhem.de/archive.key state=present
+
 - name: Add Fhem APT Repository
   apt_repository: repo="deb https://debian.fhem.de/stable ./" state=present update_cache=yes
 
