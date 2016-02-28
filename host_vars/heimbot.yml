@@ -401,8 +401,8 @@ HOMEBRIDGE:
         user: "{{ FHEM.security.web.user }}"
         password: "{{ FHEM.security.web.password }}"
   nodejs:
-    version: node-v4.2.3-linux-armv7l
-    download_url: https://nodejs.org/dist/v4.2.3/node-v4.2.3-linux-armv7l.tar.gz
+    version: node-v4.3.1-linux-armv7l
+    download_url: https://nodejs.org/dist/v4.3.1/node-v4.3.1-linux-armv7l.tar.xz
 
 
 IPTABLES:
