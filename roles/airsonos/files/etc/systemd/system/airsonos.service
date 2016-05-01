@@ -1,0 +1,11 @@
+[Unit]
+Description=AirSonos server
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/airsonos
+
+[Install]
+WantedBy=multi-user.target
+

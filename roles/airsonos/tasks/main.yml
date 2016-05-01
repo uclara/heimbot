@@ -1,0 +1,25 @@
+---
+
+- name: Install AirSonos
+  command: npm install -g airsonos
+  notify:
+    - Reload AirSonos
+
+- name: Install AirSonos Systemd Unit
+  copy: src="{{ item }}" dest="/{{ item }}" owner=root group=root mode=0644
+  with_items:
+    - etc/systemd/system/airsonos.service
+
+- name: Setup AirSonos Autostart
+  service: name=airsonos state=started enabled=yes
+
+- name: Install AirSonos Alternative
+  command: update-alternatives --install "/usr/bin/{{ item }}" {{ item }} /opt/nodejs/{{ _nodejs.version }}/bin/{{ item }} 1000
+  with_items:
+    - airsonos
+
+- name: Set Installed AirSonos Active Alternative
+  command: update-alternatives --set {{ item }} /opt/nodejs/{{ _nodejs.version }}/bin/{{ item }}
+  with_items:
+    - airsonos
+

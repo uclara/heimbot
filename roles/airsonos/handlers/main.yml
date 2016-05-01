@@ -1,0 +1,3 @@
+- name: Reload AirSonos
+  service: name=airsonos state=restarted
+
