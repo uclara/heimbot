@@ -400,9 +400,6 @@ HOMEBRIDGE:
       security:
         user: "{{ FHEM.security.web.user }}"
         password: "{{ FHEM.security.web.password }}"
-  nodejs:
-    version: node-v4.3.1-linux-armv7l
-    download_url: https://nodejs.org/dist/v4.3.1/node-v4.3.1-linux-armv7l.tar.xz
 
 
 IPTABLES:
@@ -455,6 +452,11 @@ NETWORKING:
         password: "{{ S_NETWORKING.wifi.pdt_02.password }}"
       firmware:
         package: firmware-ralink
+
+
+NODEJS:
+  version: node-v4.3.1-linux-armv7l
+  download_url: https://nodejs.org/dist/v4.3.1/node-v4.3.1-linux-armv7l.tar.xz
 
 
 OPS_TOOLS:

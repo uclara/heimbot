@@ -1,40 +1,5 @@
 ---
 
-- name: Install gcc
-  apt: pkg={{ item }} state=latest
-  with_items:
-    - build-essential
-    - libssl-dev
-
-- name: Install Avahi Developer Packages
-  apt: pkg=libavahi-compat-libdnssd-dev
-
-- name: Create Download Directory
-  file: name=/var/lib/downloads state=directory mode=0755 owner=root group=root
-
-- name: Download Node.js
-  get_url: url={{ _homebridge.nodejs.download_url }} dest="/var/lib/downloads/nodejs.tgz"
-  register: download
-
-- name: Create Unpack Directory
-  file: name=/opt/nodejs state=directory mode=0755 owner=root group=root
-
-- name: Unpack Download
-  unarchive: src="/var/lib/downloads/nodejs.tgz" dest=/opt/nodejs mode=0755 owner=root group=root copy=no
-  when: download|changed
-
-- name: Install Node.js Active Alternative
-  command: update-alternatives --install "/usr/bin/{{ item }}" {{ item }} /opt/nodejs/{{ _homebridge.nodejs.version }}/bin/{{ item }} 1000
-  with_items:
-    - node
-    - npm
-
-- name: Set Installed Node.js Active Alternative
-  command: update-alternatives --set {{ item }} /opt/nodejs/{{ _homebridge.nodejs.version }}/bin/{{ item }}
-  with_items:
-    - node
-    - npm
-
 - name: Install Homebridge and Modules
   command: npm install -g {{ item }}
   with_items: _homebridge.modules
@@ -48,12 +13,12 @@
   service: name=homebridge state=started enabled=yes
 
 - name: Install Homebridge Alternative
-  command: update-alternatives --install "/usr/bin/{{ item }}" {{ item }} /opt/nodejs/{{ _homebridge.nodejs.version }}/bin/{{ item }} 1000
+  command: update-alternatives --install "/usr/bin/{{ item }}" {{ item }} /opt/nodejs/{{ _nodejs.version }}/bin/{{ item }} 1000
   with_items:
     - homebridge
 
 - name: Set Installed Homebridge Active Alternative
-  command: update-alternatives --set {{ item }} /opt/nodejs/{{ _homebridge.nodejs.version }}/bin/{{ item }}
+  command: update-alternatives --set {{ item }} /opt/nodejs/{{ _nodejs.version }}/bin/{{ item }}
   with_items:
     - homebridge
 
