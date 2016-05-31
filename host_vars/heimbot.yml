@@ -243,7 +243,7 @@ FHEM:
     # Wetter -- Yahoo, Köln
     # ========================
     #
-    define wetter_koeln Weather 20066502 600 de
+    define wetter_koeln Weather 667931 600 de
     attr wetter_koeln room Wettervorhersage
     define FileLog_wetter_koeln FileLog ./log/meinwetter-%Y-%m.log wetter_koeln
     attr FileLog_wetter_koeln logtype text
@@ -254,7 +254,7 @@ FHEM:
     # Wetter -- Wunderground, Waidmarkt
     # ========================
     #
-    define wetter_waidmarkt HTTPMOD http://api.wunderground.com/weatherstation/WXCurrentObXML.asp?ID=IKLN797 600
+    define wetter_waidmarkt HTTPMOD http://api.wunderground.com/weatherstation/WXCurrentObXML.asp?ID=INRWCOLO2 600
     attr wetter_waidmarkt room Wettervorhersage
     attr wetter_waidmarkt userattr readingsName_date readingsName_dewpointTemperature readingsName_humidity readingsName_pressure readingsName_temperature readingsName_time readingsRegex_date readingsRegex_dewpointTemperature readingsRegex_humidity readingsRegex_pressure readingsRegex_temperature
     attr wetter_waidmarkt readingsName_date date

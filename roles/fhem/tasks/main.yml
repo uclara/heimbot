@@ -19,6 +19,7 @@
     - make
     - dfu-programmer
     - fhem
+    - libjson-perl
     - sysstat
     - libsys-statistics-linux-perl
   register: installation_changed
