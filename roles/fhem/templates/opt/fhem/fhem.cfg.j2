@@ -16,6 +16,9 @@ attr global userattr cmdIcon devStateIcon devStateStyle fm_type icon room_map so
 # APIs and GUIs
 # ========================
 
+# Telnet on localhost only
+define telnetPort telnet 7072
+
 define WEB FHEMWEB 8083
 attr WEB JavaScripts codemirror/fhem_codemirror.js
 # HAProxy takes care to this # attr WEB basicAuth {{ (_fhem.security.web.user ~ ":" ~ _fhem.security.web.password) | b64encode }}

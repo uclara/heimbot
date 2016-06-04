@@ -160,6 +160,8 @@ The Ansible roles invoked by the site playbook support a few parameters which yo
 
     * `clean_fhem_saved_state=[True|False]` -- Clears Fhem saved state.
 
+    * `update_fhem` -- Update Fhem.
+
 * `homebridge`
 
     * `clean_homebridge_identifier_cache=[True|False]` -- Clears Homebridge identifier cache and restarts homebridge.

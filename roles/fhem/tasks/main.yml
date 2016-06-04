@@ -24,6 +24,12 @@
     - libsys-statistics-linux-perl
   register: installation_changed
 
+- name: Update Fhem
+  command: /opt/fhem/fhem.pl localhost:7072 update
+  when: update_fhem is defined
+  notify:
+    - Restart Fhem
+
 - name: Stop Fhem after Installation
   service: name=fhem state=stopped
   when: installation_changed|changed or clean_fhem_saved_state is defined and clean_fhem_saved_state

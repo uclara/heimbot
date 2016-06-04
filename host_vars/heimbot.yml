@@ -243,7 +243,7 @@ FHEM:
     # Wetter -- Yahoo, Köln
     # ========================
     #
-    define wetter_koeln Weather 667931 600 de
+    define wetter_koeln Weather 20066499 600 de
     attr wetter_koeln room Wettervorhersage
     define FileLog_wetter_koeln FileLog ./log/meinwetter-%Y-%m.log wetter_koeln
     attr FileLog_wetter_koeln logtype text
