@@ -31,30 +31,41 @@
         <li data-row="1" data-col="1" data-sizex="2" data-sizey="5">
           <header>Wetter Köln</header>
           <div class="container row">
-            <div data-type="label" class="cell large left">Heute</div>
-            <div data-type="weather" data-device="wetter_koeln" data-get="condition" class="cell big"></div>
-            <div class="cell left">
-              <div data-type="label">Temperatur</div>
-              <div data-type="label">Luftfeuchte</div>
+            <div class="container row">
+              <div class="cell left">
+                <div data-type="label" class="large left">Heute</div>
+              </div>
             </div>
-            <div class="cell right">
-              <div data-type="label" data-device="wetter_waidmarkt" data-get="temperature" data-unit="%B0C%0A"></div>
-              <div data-type="label" data-device="wetter_waidmarkt" data-get="humidity" data-unit="%"></div>
+            <div class="container row">
+              <div class="cell left">
+                <div data-type="label" data-device="wetter_waidmarkt" data-get="temperature" class="inline"></div>&deg;C und <div data-type="label" data-device="wetter_waidmarkt" data-get="humidity" class="inline"></div>% Luftfeuchte
+              </div>
+           </div>
+            <div class="container row">
+              <div data-type="weather" data-device="wetter_koeln" data-get="condition" class="cell big"></div>
             </div>
           </div>
-{% for i in [2, 3, 4, 5] %}
+          <hr>
+{% for i in [2, 3, 4] %}
           <div class="container row">
-            <div data-type="label" data-device="wetter_koeln" data-get="fc{{ i }}_day_of_week" class="cell large left"></div>
-            <div data-type="weather" data-device="wetter_koeln" data-get="fc{{ i }}_condition" class="cell big"></div>
-            <div class="cell left">
-              <div data-type="label">Tief</div>
-              <div data-type="label">Hoch</div>
+            <div class="container row">
+              <div class="cell left">
+                <div data-type="label" data-device="wetter_koeln" data-get="fc{{ i }}_day_of_week" class="large left"></div>
+              </div>
+              <div class="cell right">
+                <div data-type="label" data-device="wetter_koeln" data-get="fc{{ i }}_date" class="large left"></div>
+              </div>
             </div>
-            <div class="cell right">
-              <div data-type="label" data-device="wetter_koeln" data-get="fc{{ i }}_low_c" data-unit="%B0C%0A" class="align-left"></div>
-              <div data-type="label" data-device="wetter_koeln" data-get="fc{{ i }}_high_c" data-unit="%B0C%0A" class="align-left"></div>
+            <div class="container row">
+              <div class="cell left">
+                <div data-type="label" data-device="wetter_koeln" data-get="fc{{ i }}_condition" class="inline"></div>bei <div data-type="label" data-device="wetter_koeln" data-get="fc{{ i }}_low_c" class="inline"></div>bis <div data-type="label" data-device="wetter_koeln" data-get="fc{{ i }}_high_c" class="inline"></div>&deg;C
+              </div>
+            </div>
+            <div class="container row">
+              <div data-type="weather" data-device="wetter_koeln" data-get="fc{{ i }}_condition" class="cell big"></div>
             </div>
           </div>
+          <hr>
 {% endfor %}
         </li>
 {% for (room, r) in _fhem_tablet_ui.rooms|dictsort %}
