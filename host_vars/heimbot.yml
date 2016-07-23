@@ -88,17 +88,13 @@ FHEM:
         alias: Fische
         group: Licht
         gen_type: light
-        rooms:
-          - Flur
-          - Homekit
+        rooms: [ hidden ]
       schalter_2B:
         code: 0000F0F00F
         alias: Fischbubbles
         group: Schalter
         gen_type: switch
-        rooms:
-          - Flur
-          - Homekit
+        rooms: [ hidden ]
       schalter_2C:
         code: 00000FF00F
         gen_type: light
@@ -326,8 +322,6 @@ FHEM_TABLET_UI:
     Flur:
       devices:
         schalter_HM4_Switch: "{{ FHEM.homematic.devices['schalter_HM4'].channels|first }}"
-        schalter_2A: "{{ FHEM.intertechno.devices['schalter_2A'] }}"
-        schalter_2B: "{{ FHEM.intertechno.devices['schalter_2B'] }}"
     Arbeitszimmer:
       devices:
         schalter_3A: "{{ FHEM.intertechno.devices['schalter_3A'] }}"
