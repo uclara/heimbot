@@ -55,6 +55,10 @@ FHEM:
       name: schalter_HM3
       title: "Stehlampe - $data{currval1} Wh, $data{currval2} Watt"
       template: HM-ES-PMSw1-Pl.gplot.j2
+    4A7E3E:
+      name: schalter_HM4
+      title: "Fischsteckdose"
+      template: HM-ES-PMSw1-Pl.gplot.j2
   intertechno:
     # siehe http://www.fhemwiki.de/wiki/Intertechno_Code_Berechnung
     devices:
@@ -229,6 +233,42 @@ FHEM:
           - name: FrequencySenor
             channel: 06
             rooms: [ hidden ]
+      schalter_HM4:
+        address: 4A7E3E
+        serialNr: NEQ0384882
+        subType: powerMeter
+        IODev: CUL_868
+        actCycle: 000:10
+        actStatus: alive
+        autoReadReg: 4_reqStatus
+        expert: 2_full
+        firmware: 1.6
+        model: HM-ES-PMSw1-Pl
+        webCmd: "getConfig:clear msgEvents"
+        channels:
+          - name: Switch
+            subType: switch
+            channel: 01
+            alias: "Fischdose"
+            group: Schalter
+            gen_type: switch
+            icon: "light_light"
+            rooms: [ Flur, Homekit ]
+          - name: Power
+            channel: 02
+            rooms: [ hidden ]
+          - name: PowerSenor
+            channel: 03
+            rooms: [ hidden ]
+          - name: CurrentSenor
+            channel: 04
+            rooms: [ hidden ]
+          - name: VoltageSenor
+            channel: 05
+            rooms: [ hidden ]
+          - name: FrequencySenor
+            channel: 06
+            rooms: [ hidden ]
   extra: |+
     # ========================
     # Additional Devices
@@ -285,6 +325,7 @@ FHEM_TABLET_UI:
         schalter_1B: "{{ FHEM.intertechno.devices['schalter_1B'] }}"
     Flur:
       devices:
+        schalter_HM4_Switch: "{{ FHEM.homematic.devices['schalter_HM4'].channels|first }}"
         schalter_2A: "{{ FHEM.intertechno.devices['schalter_2A'] }}"
         schalter_2B: "{{ FHEM.intertechno.devices['schalter_2B'] }}"
     Arbeitszimmer:
