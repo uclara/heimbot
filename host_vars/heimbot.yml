@@ -475,7 +475,10 @@ NETWORKING:
       active: Yes
       config: |+
         auto eth0
-        iface eth0 inet dhcp
+        iface eth0 inet static
+          address 192.168.101.10
+          netmask 255.255.255.0
+          gateway 192.168.101.1
     - name: wlan0
       active: No
       config: |+
