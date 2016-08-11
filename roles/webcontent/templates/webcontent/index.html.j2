@@ -13,10 +13,7 @@
 
     <div id="wrapper">
 
-      <div class="header">
-        <h1 class="logo">{{ ansible_hostname|capitalize }}</h1>
-      </div>
-      <h2><i class="fa fa-bars">&nbsp;</i> Services</h2>
+      <h2><i class="fa fa-bars">&nbsp;</i>{{ ansible_hostname|capitalize }}</h2>
 
       <h3>Home Automatization</h3>
       <ul class="buttons" style="margin-bottom: 25px;">
@@ -44,6 +41,7 @@
         <li><a href="https://webserver.centerdevice.de:8170"><i class="fa fa-line-chart">&nbsp;</i>Bosun</a></li>
       </ul>
 
+    </div>
 
   </body>
 </html>
