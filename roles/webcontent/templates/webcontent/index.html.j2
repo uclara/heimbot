@@ -13,7 +13,7 @@
 
     <div id="wrapper">
 
-      <h2><i class="fa fa-bars">&nbsp;</i>{{ ansible_hostname|capitalize }}</h2>
+      <h2><i class="fa fa-bars">&nbsp;</i>PDT</h2>
 
       <h3>Home Automatization</h3>
       <ul class="buttons" style="margin-bottom: 25px;">
@@ -30,7 +30,6 @@
       <h3>Machines</h3>
       <ul class="buttons" style="margin-bottom: 25px;">
         <li><a href="https://kevin.{{ ansible_domain }}:5001"><i class="fa fa-database">&nbsp;</i>Kevin</a></li>
-        <li><a href="https://esel.{{ ansible_domain }}:5001"><i class="fa fa-database">&nbsp;</i>Esel</a></li>
         <li><a href="http://fritz.box"><i class="fa fa-random">&nbsp;</i>Fritz Box</a></li>
         <li><a href="http://192.168.101.2"><i class="fa fa-wifi">&nbsp;</i>R6400</a></li>
       </ul>
@@ -39,6 +38,15 @@
       <ul class="buttons" style="margin-bottom: 25px;">
         <li><a href="http://{{ ansible_fqdn }}:8404/monitor"><i class="fa fa-table">&nbsp;</i>HAProxy</a></li>
         <li><a href="https://webserver.centerdevice.de:8170"><i class="fa fa-line-chart">&nbsp;</i>Bosun</a></li>
+      </ul>
+
+      <h2><i class="fa fa-bars">&nbsp;</i>PSV</h2>
+
+      <h3>Machines</h3>
+      <ul class="buttons" style="margin-bottom: 25px;">
+        <li><a href="https://192.168.178.11:5001"><i class="fa fa-database">&nbsp;</i>Esel</a></li>
+        <li><a href="https://192.168.178.12:5001"><i class="fa fa-database">&nbsp;</i>Osel</a></li>
+        <li><a href="http://192.168.178.1"><i class="fa fa-random">&nbsp;</i>Fritz Box</a></li>
       </ul>
 
     </div>
