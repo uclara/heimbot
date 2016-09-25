@@ -270,6 +270,32 @@ FHEM:
     # Additional Devices
     # ========================
     #
+    define Papierleuchten structure room schalter_HM1_Switch schalter_HM2_Switch
+    attr Papierleuchten room Wohnzimmer
+    #
+    define DASHBUTTON_1 PRESENCE lan-ping dashbutton-1 1
+    attr DASHBUTTON_1 ping_count 1
+    attr DASHBUTTON_1 event-on-change-reading state,presence
+    attr DASHBUTTON_1 userReadings lastpresent {if (Value("DASHBUTTON_1") eq "present") {ReadingsTimestamp("DASHBUTTON_1", "state", "false")} else {ReadingsVal("DASHBUTTON_1","lastpresent","")}}
+    attr DASHBUTTON_1 alias Dashbutton-1
+    attr DASHBUTTON_1 group Dash Button
+    attr DASHBUTTON_1 room Dash
+    define DASHBUTTON_1_ACTION notify DASHBUTTON_1:present IF ( [Papierleuchten] eq "on") ( set Papierleuchten off ) ELSE ( set Papierleuchten on )
+    attr DASHBUTTON_1_ACTION room hidden
+    #
+    define DASHBUTTON_2 PRESENCE lan-ping dashbutton-2 1
+    attr DASHBUTTON_2 ping_count 1
+    attr DASHBUTTON_2 event-on-change-reading state,presence
+    attr DASHBUTTON_2 userReadings lastpresent {if (Value("DASHBUTTON_2") eq "present") {ReadingsTimestamp("DASHBUTTON_2", "state", "false")} else {ReadingsVal("DASHBUTTON_2","lastpresent","")}}
+    attr DASHBUTTON_2 alias Dashbutton-2
+    attr DASHBUTTON_2 group Dash Button
+    attr DASHBUTTON_2 room Dash
+    define DASHBUTTON_2_ACTION notify DASHBUTTON_2:present IF ( [schalter_HM4_Switch] eq "on") ( set schalter_HM4_Switch off ) ELSE ( set schalter_HM4_Switch on )
+    attr DASHBUTTON_2_ACTION room hidden
+    # ========================
+    # Additional Devices
+    # ========================
+    #
     define Fernseher STV 192.168.101.12
     attr Fernseher icon it_television
     attr Fernseher devStateIcon .*on:audio_volume_high .*off:audio_volume_mute .*:unknown
