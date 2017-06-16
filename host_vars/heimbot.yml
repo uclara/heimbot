@@ -330,6 +330,12 @@ FHEM:
     attr wetter_waidmarkt readingsRegex_pressure <pressure_mb>([\d\.]+)
     attr wetter_waidmarkt readingsRegex_solarUV <UV>([\d\.]+)
     attr wetter_waidmarkt readingsRegex_temperature <temp_c>([\d\.]+)
+    # ========================
+    # Feinstaubsensor / Luftdateninfo
+    # ========================
+    #
+    define feinstaub_waidmarkt LuftdatenInfo 2329980
+    attr feinstaub_waidmarkt room Wettervorhersage
   end:
 
 
