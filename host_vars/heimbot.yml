@@ -334,7 +334,7 @@ FHEM:
     # Feinstaubsensor / Luftdateninfo
     # ========================
     #
-    define feinstaub_waidmarkt LuftdatenInfo 2329980
+    define feinstaub_waidmarkt LuftdatenInfo 3585
     attr feinstaub_waidmarkt room Wettervorhersage
   end:
 
