@@ -44,7 +44,11 @@
 
 - name: Create GNUplot Files
   template: src='opt/fhem/www/gplot/{{ item.value.template }}' dest='/opt/fhem/www/gplot/{{ item.key }}.gplot' owner=fhem group=dialout mode=0600
-  with_dict: "{{ _fhem.plots }}"
+  with_dict: "{{ _fhem.plots.templates }}"
+
+- name: Copy GNUplot Files
+  copy: src='opt/fhem/www/gplot/{{ item }}' dest='/opt/fhem/www/gplot/{{ item }}' owner=fhem group=dialout mode=0600
+  with_items: "{{ _fhem.plots.files }}"
 
 - name: Create Fhem Configuration
   template: src='{{ item }}.j2' dest='/{{ item }}' owner=fhem group=dialout mode=0600

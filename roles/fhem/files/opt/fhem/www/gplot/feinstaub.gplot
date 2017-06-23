@@ -1,0 +1,18 @@
+set terminal png transparent size <SIZE> crop
+set termoption enhanced
+set output '<OUT>.png'
+set xdata time
+set timefmt "%Y-%m-%d_%H:%M:%S"
+set xlabel " "
+set title '<L1>'
+set ytics
+set y2tics
+set grid
+set ylabel 'PM in {/Symbol mu}/m^3'
+
+#FileLog 4:feinstaub_waidmarkt.PM10\x3a::
+#FileLog 4:feinstaub_waidmarkt.PM2.5\x3a::
+
+plot "<IN>" using 1:2 axes x1y1 title 'PM10' ls l0 lw 1 with lines,\
+     "<IN>" using 1:2 axes x1y1 title 'PM2.5' ls l1 lw 1 with lines
+

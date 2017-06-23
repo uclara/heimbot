@@ -154,7 +154,7 @@ attr {{ name }}_{{ c.name }} room {{ c.rooms|join(',') }},HomeMatic
 # ========================
 # Plots
 # ========================
-{% for (name, p) in _fhem.plots|dictsort %}
+{% for (name, p) in _fhem.plots.templates|dictsort %}
 define SVG_{{ name }} SVG FileLog_{{ name }}:{{ name }}:CURRENT
 attr SVG_{{ name }} label "{{ p.title }}"
 attr SVG_{{ name }} room Plots

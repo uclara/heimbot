@@ -1,0 +1,18 @@
+set terminal png transparent size <SIZE> crop
+set output '<OUT>.png'
+set xdata time
+set timefmt "%Y-%m-%d_%H:%M:%S"
+set xlabel " "
+set title '<L1>'
+set ytics
+set y2tics
+set grid
+set ylabel "Temperatur in &#xb0;C"
+set y2label "Luftfeuchtigkeit in %"
+
+#FileLog 4:feinstaub_waidmarkt.temperature\x3a::
+#FileLog 4:feinstaub_waidmarkt.humidity\x3a::
+
+plot "<IN>" using 1:2 axes x1y1 title 'Temperatur' ls l0 lw 1 with lines,\
+     "<IN>" using 1:2 axes x1y2 title 'Luftfeuchtigkeit' ls l1 lw 1 with lines
+

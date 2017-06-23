@@ -43,22 +43,26 @@ FHEM:
         868:
           device_path: "/dev/{{ CUL.symlinks.868 }}"
   plots:
-    3705C3:
-      name: schalter_HM1
-      title: "Papierleuchte am Esstisch - $data{currval1} Wh, $data{currval2} Watt"
-      template: HM-ES-PMSw1-Pl.gplot.j2
-    3705E8:
-      name: schalter_HM2
-      title: "Papierleuchte am Fernseher - $data{currval1} Wh, $data{currval2} Watt"
-      template: HM-ES-PMSw1-Pl.gplot.j2
-    37C3FD:
-      name: schalter_HM3
-      title: "Stehlampe - $data{currval1} Wh, $data{currval2} Watt"
-      template: HM-ES-PMSw1-Pl.gplot.j2
-    4A7E3E:
-      name: schalter_HM4
-      title: "Fischsteckdose"
-      template: HM-ES-PMSw1-Pl.gplot.j2
+    templates:
+      3705C3:
+        name: schalter_HM1
+        title: "Papierleuchte am Esstisch - $data{currval1} Wh, $data{currval2} Watt"
+        template: HM-ES-PMSw1-Pl.gplot.j2
+      3705E8:
+        name: schalter_HM2
+        title: "Papierleuchte am Fernseher - $data{currval1} Wh, $data{currval2} Watt"
+        template: HM-ES-PMSw1-Pl.gplot.j2
+      37C3FD:
+        name: schalter_HM3
+        title: "Stehlampe - $data{currval1} Wh, $data{currval2} Watt"
+        template: HM-ES-PMSw1-Pl.gplot.j2
+      4A7E3E:
+        name: schalter_HM4
+        title: "Fischsteckdose"
+        template: HM-ES-PMSw1-Pl.gplot.j2
+    files:
+      - feinstaub.gplot
+      - temp_humidity.gplot
   intertechno:
     # siehe http://www.fhemwiki.de/wiki/Intertechno_Code_Berechnung
     devices:
@@ -334,8 +338,18 @@ FHEM:
     # Feinstaubsensor / Luftdateninfo
     # ========================
     #
-    define feinstaub_waidmarkt LuftdatenInfo 3585
+    # define feinstaub_waidmarkt LuftdatenInfo 3585
+    define feinstaub_waidmarkt LuftdatenInfo feinstaub
     attr feinstaub_waidmarkt room Wettervorhersage
+    define FileLog_feinstaub_waidmarkt FileLog ./log/feinstaub_waidmarkt-%Y-%m.log feinstaub_waidmarkt:.*
+    attr FileLog_feinstaub_waidmarkt logtype text
+    attr FileLog_feinstaub_waidmarkt room hidden
+    define SVG_feinstaub_waidmarkt SVG FileLog_feinstaub_waidmarkt:feinstaub:CURRENT
+    attr SVG_feinstaub_waidmarkt label "Feinstaubsensor Waidmarkt - $data{currval1} PM10, $data{currval2} PM2.5"
+    attr SVG_feinstaub_waidmarkt room Plots
+    define SVG_temperatur_waidmarkt SVG FileLog_feinstaub_waidmarkt:temp_humidity:CURRENT
+    attr SVG_temperatur_waidmarkt label "Feinstaubsensor Waidmarkt - $data{currval1} °C, $data{currval2} %"
+    attr SVG_temperatur_waidmarkt room Plots
   end:
 
 
