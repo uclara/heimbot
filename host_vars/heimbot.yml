@@ -469,13 +469,7 @@ HOMEBRIDGE:
     - homebridge
     - homebridge-fhem
     - homebridge-sonos
-  accessories:
-    - accessory: "Sonos"
-      name: "Wohnzimmer Boxen"
-      room: "Wohnzimmer"
-    - accessory: "Sonos"
-      name: "Arbeitszimmer Boxen"
-      room: "Arbeitszimmer"
+  accessories: []
   platforms:
     fhem:
       security:
@@ -615,8 +609,8 @@ NETWORKING:
 
 
 NODEJS:
-  version: node-v4.3.1-linux-armv7l
-  download_url: https://nodejs.org/dist/v4.3.1/node-v4.3.1-linux-armv7l.tar.xz
+  version: node-v6.11.0-linux-armv7l
+  download_url: https://nodejs.org/dist/v6.11.0/node-v6.11.0-linux-armv7l.tar.xz
 
 
 OPS_TOOLS:

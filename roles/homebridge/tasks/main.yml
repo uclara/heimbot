@@ -1,7 +1,7 @@
 ---
 
 - name: Install Homebridge and Modules
-  command: npm install -g {{ item }}
+  command: npm install -g --unsafe-perm {{ item }}
   with_items: _homebridge.modules
 
 - name: Install Homebridge Systemd Unit
