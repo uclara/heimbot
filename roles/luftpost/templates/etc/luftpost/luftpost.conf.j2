@@ -1,0 +1,44 @@
+[defaults]
+{% if _luftpost.config.defaults.threshold_pm10 is defined %}threshold_pm10 ={{ _luftpost.config.defaults.threshold_pm10 }}
+{% endif %}
+{% if _luftpost.config.defaults.threshold_pm2 is defined %}threshold_pm2 = {{ _luftpost.config.defaults.threshold_pm2 }}
+{% endif %}
+{% if _luftpost.config.defaults.notification is defined %}[defaults.notification_condition]
+condition = "{{ _luftpost.config.defaults.notification }}"
+{% endif %}
+
+{% if _luftpost.config.smtp is defined %}
+[smtp]
+sender = "{{ _luftpost.config.smtp.sender }}"
+receiver = "{{ _luftpost.config.smtp.receiver }}"
+subject = "{{ _luftpost.config.smtp.subject }}"
+server = "{{ _luftpost.config.smtp.server }}"
+port = {{ _luftpost.config.smtp.port }}
+{% if _luftpost.config.smtp.username is defined %}username = "{{_luftpost.config.smtp.username }}"
+{% endif %}
+{% if _luftpost.config.smtp.password is defined %}password = "{{_luftpost.config.smtp.password }}"
+{% endif %}
+{% if _luftpost.config.smtp.auth_mechanism is defined %}auth_mechanism = "{{_luftpost.config.smtp.auth_mechanism }}"
+{% endif %}
+{% if _luftpost.config.smtp.text_template is defined %}text_template = """{{_luftpost.config.smtp.text_template}}"""
+{% endif %}
+{% if _luftpost.config.smtp.html_template is defined %}html_template = """{{_luftpost.config.smtp.html_template}}"""
+{% endif %}
+{% endif %}
+
+{% for s in _luftpost.config.sensors %}
+[[sensors]]
+name = "{{ s.name }}"
+id = "{{ s.id }}"
+ui_uri = "{{ s.ui_uri }}"
+data_uri = "{{ s.data_uri }}"
+{% if s.threshold_pm10 is defined %}threshold_pm10 = {{ s.threshold_pm10 }}
+{% endif %}
+{% if s.threshold_pm2 is defined %}threshold_pm2 = {{ s.threshold_pm2 }}
+{% endif %}
+{% if s.notification is defined %}[sensors.notification_condition]
+condition = "{{ s.notification }}"
+{% endif %}
+
+{% endfor %}
+

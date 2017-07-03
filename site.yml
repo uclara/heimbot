@@ -20,3 +20,5 @@
     - { role: webcontent, tags: ['webcontent'], _webcontent: "{{ WEBCONTENT }}" }
     - { role: haproxy, tags: ['haproxy'], _haproxy: "{{ HAPROXY }}" }
 
+    - { role: luftpost, tags: ['luftpost'], _luftpost: "{{ LUFTPOST }}" }
+

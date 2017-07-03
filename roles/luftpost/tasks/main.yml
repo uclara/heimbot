@@ -1,0 +1,45 @@
+---
+
+- name: Add Package Cloud GPG Key for lukaspustina Repository
+  apt_key:
+    id: D59097AB
+    url: "https://packagecloud.io/lukaspustina/opensource/gpgkey"
+    state: present
+
+- name: Add lukaspustina Opensource Repository
+  apt_repository:
+    repo: "deb https://packagecloud.io/lukaspustina/opensource/ubuntu/ trusty main"
+    state: present
+  register: repo_added
+
+- name: Apt Update
+  apt:
+    update_cache: yes
+  when: repo_added|changed
+
+- name: Install luftpost
+  apt:
+    name: luftpost
+    state: "{{ _luftpost.state|default('present') }}"
+
+- name: Configure luftpost
+  template:
+    src: etc/luftpost/luftpost.conf.j2
+    dest: "{{ _luftpost.config.file_name }}"
+    owner: root
+    group: root
+    mode: 0640
+
+- name: Verify Configuration
+  command: /usr/bin/luftpost --config-file "{{ _luftpost.config.file_name }}" --check-config
+
+- name: Configure Cron for luftpost
+  cron:
+    name: luftpost sensor check
+    weekday: "{{ _luftpost.cron.weekday }}"
+    minute: "{{ _luftpost.cron.minute }}"
+    hour: "{{ _luftpost.cron.hour }}"
+    user: root
+    job: "/usr/bin/luftpost --config-file=/etc/luftpost/luftpost.conf"
+    cron_file: luftpost
+
