@@ -22,3 +22,6 @@
   version: v0.1.0
   name: iptables
 
+- src: lukaspustina.luftpost
+  name: luftpost
+
