@@ -515,8 +515,8 @@ LUFTPOST:
   config:
     file_name: /etc/luftpost/luftpost.conf
     defaults:
-      threshold_pm10: 20.0
-      threshold_pm2: 20.0
+      threshold_pm10: 45.0
+      threshold_pm2: 40.0
       notification: ThresholdExceeded
     smtp:
       sender: "{{ S_LUFTPOST.config.smtp.sender }}"
@@ -547,7 +547,7 @@ LUFTPOST:
       html_template: !unsafe |
         Hello,
         <p>
-        a measurement from your sensor <a href="{{ sensor.uri }}">{{ sensor.name }}</a> exceeded a threshold.
+        a measurement from your sensor <a href="{{ sensor.ui_uri }}">{{ sensor.name }}</a> exceeded a threshold.
         </p>
         <p>
         <b>Particulate Measurements</b>
@@ -577,8 +577,6 @@ LUFTPOST:
         id: "{{ S_LUFTPOST.sensors.sensor1.id }}"
         ui_uri: "http://feinstaub"
         data_uri: "http://feinstaub/data.json"
-        threshold_pm10: 20.0
-        threshold_pm2: 20.0
         notification: ThresholdExceeded
 
 
