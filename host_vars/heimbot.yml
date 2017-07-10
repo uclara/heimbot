@@ -515,8 +515,8 @@ LUFTPOST:
   config:
     file_name: /etc/luftpost/luftpost.conf
     defaults:
-      threshold_pm10: 45.0
-      threshold_pm2: 40.0
+      threshold_pm10: 100.00
+      threshold_pm2: 100.00
       notification: ThresholdExceeded
     smtp:
       sender: "{{ S_LUFTPOST.config.smtp.sender }}"
