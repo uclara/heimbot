@@ -508,10 +508,12 @@ LUFTPOST:
     hour: "*"
   config:
     file_name: /etc/luftpost/luftpost.conf
+    general:
+      state_dir: /var/lib/luftpost
     defaults:
-      threshold_pm10: 100.00
-      threshold_pm2: 100.00
-      notification: ThresholdExceeded
+      threshold_pm10: 50.00
+      threshold_pm2: 50.00
+      notification: OnChange
     smtp:
       sender: "{{ S_LUFTPOST.config.smtp.sender }}"
       receiver: "{{ S_LUFTPOST.config.smtp.receiver }}"
@@ -571,7 +573,7 @@ LUFTPOST:
         id: "{{ S_LUFTPOST.sensors.sensor1.id }}"
         ui_uri: "http://feinstaub"
         data_uri: "http://feinstaub/data.json"
-        notification: ThresholdExceeded
+        notification: OnChange
 
 
 MOTD:
