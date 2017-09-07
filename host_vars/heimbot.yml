@@ -517,7 +517,7 @@ LUFTPOST:
     smtp:
       sender: "{{ S_LUFTPOST.config.smtp.sender }}"
       receiver: "{{ S_LUFTPOST.config.smtp.receiver }}"
-      subject: !unsafe "Luftpost: Threshold exceeded for sensor {{ sensor.name }} ({{ sensor.id }})"
+      subject: !unsafe "Luftpost: Threshold exceeded for sensor {{ measurement.sensor.name }} ({{ measurement.sensor.id }})"
       server: "smtp.gmail.com"
       port: 25
       username: "{{ S_LUFTPOST.config.smtp.username }}"
