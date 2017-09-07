@@ -511,8 +511,8 @@ LUFTPOST:
     general:
       state_dir: /var/lib/luftpost
     defaults:
-      threshold_pm10: 20.00
-      threshold_pm2: 20.00
+      threshold_pm10: 50.00
+      threshold_pm2: 50.00
       notification: OnChange
     smtp:
       sender: "{{ S_LUFTPOST.config.smtp.sender }}"
