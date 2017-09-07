@@ -526,7 +526,7 @@ LUFTPOST:
       text_template: !unsafe |
         Hello,
 
-        a measurement from your sensor "{{ measurement.sensor.name }}" {{#if has_violations }}exceeded a threshol{{else}}is back to normal{{/if}}.
+        a measurement from your sensor "{{ measurement.sensor.name }}" {{#if has_violations }}exceeded a threshold{{else}}is back to normal{{/if}}.
 
         {{#with measurement}}
         Particulate Measurements
@@ -545,7 +545,7 @@ LUFTPOST:
       html_template: !unsafe |
         Hello,
         <p>
-        a measurement from your sensor <a href="{{ measurement.sensor.ui_uri  }}">{{ measurement.sensor.name  }}</a> {{#if has_violations }}exceeded a threshol{{else}}is back to normal{{/if}}.
+        a measurement from your sensor <a href="{{ measurement.sensor.ui_uri  }}">{{ measurement.sensor.name  }}</a> {{#if has_violations }}exceeded a threshold{{else}}is back to normal{{/if}}.
         {{#with measurement}}
         </p>
         <p>
