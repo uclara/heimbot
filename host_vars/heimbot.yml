@@ -60,6 +60,10 @@ FHEM:
         name: schalter_HM4
         title: "Fischsteckdose"
         template: HM-ES-PMSw1-Pl.gplot.j2
+      6233FD:
+        name: schalter_HM5
+        title: "Rakete"
+        template: HM-ES-PMSw1-Pl.gplot.j2
     files:
       - feinstaub.gplot
       - temp_humidity.gplot
@@ -269,6 +273,42 @@ FHEM:
           - name: FrequencySenor
             channel: 06
             rooms: [ hidden ]
+      schalter_HM5:
+        address: 6233FD
+        serialNr: OEQ0769614
+        subType: powerMeter
+        IODev: CUL_868
+        actCycle: 000:10
+        actStatus: alive
+        autoReadReg: 4_reqStatus
+        expert: 2_full
+        firmware: 1.6
+        model: HM-ES-PMSw1-Pl
+        webCmd: "getConfig:clear msgEvents"
+        channels:
+          - name: Switch
+            channel: 01
+            subType: switch
+            alias: "Rackete"
+            group: Schalter
+            gen_type: switch
+            icon: "light_light"
+            rooms: [ Küche, Homekit ]
+          - name: Power
+            channel: 02
+            rooms: [ hidden ]
+          - name: PowerSenor
+            channel: 03
+            rooms: [ hidden ]
+          - name: CurrentSenor
+            channel: 04
+            rooms: [ hidden ]
+          - name: VoltageSenor
+            channel: 05
+            rooms: [ hidden ]
+          - name: FrequencySenor
+            channel: 06
+            rooms: [ hidden ]
   extra: |+
     # ========================
     # Additional Devices
@@ -371,7 +411,9 @@ FHEM_TABLET_UI:
     Arbeitszimmer:
       devices:
         schalter_3A: "{{ FHEM.intertechno.devices['schalter_3A'] }}"
-
+    Küche:
+      devices:
+        schalter_HM5_Switch: "{{ FHEM.homematic.devices['schalter_HM5'].channels|first }}"
 
 HAPROXY:
   use_default_config: False

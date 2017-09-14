@@ -24,8 +24,9 @@ attr WEB JavaScripts codemirror/fhem_codemirror.js
 # HAProxy takes care to this # attr WEB basicAuth {{ (_fhem.security.web.user ~ ":" ~ _fhem.security.web.password) | b64encode }}
 attr WEB codemirrorParam { "theme":"blackboard", "lineNumbers":true }
 attr WEB stylesheetPrefix dark
-attr WEB sortRooms Flur Arbeitszimmer Wohnzimmer
+attr WEB sortRooms Flur Arbeitszimmer Küche Wohnzimmer
 attr WEB roomIcons Flur:scene_summerhouse Wohnzimmer:scene_livingroom Arbeitszimmer:scene_workshop
+attr WEB roomIcons Flur:scene_summerhouse Küche:scene_microwave_oven Wohnzimmer:scene_livingroom Arbeitszimmer:scene_workshop
 attr WEB group Licht
 
 define TABLETUI HTTPSRV tablet /opt/fhem-tablet-ui/www/tablet Tablet-UI
