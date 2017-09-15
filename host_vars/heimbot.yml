@@ -289,7 +289,7 @@ FHEM:
           - name: Switch
             channel: 01
             subType: switch
-            alias: "Rackete"
+            alias: "Rakete"
             group: Schalter
             gen_type: switch
             icon: "light_light"
