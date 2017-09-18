@@ -12,6 +12,10 @@ BASE:
     - apt-transport-https
     - git
 
+
+SITE:
+  domain: fritz.box
+
 UNIX_USERS:
   groups:
     - { name: adm, system: yes }
