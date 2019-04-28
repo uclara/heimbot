@@ -11,11 +11,11 @@
   apt_key: url=https://debian.fhem.de/archive.key state=present
 
 - name: Add Fhem APT Repository
-  apt_repository: repo="deb https://debian.fhem.de/stable ./" state=present update_cache=yes
+  apt_repository: repo="deb https://debian.fhem.de/nightly /" state=present update_cache=yes
 
 - name: Install Fhem
   apt:
-    name: ['make', 'dfu-programmer', 'fhem', 'libjson-perl', 'sysstat', 'libsys-statistics-linux-perl']
+    name: ['make', 'dfu-programmer', 'fhem', 'libjson-perl', 'sysstat', 'libsys-statistics-linux-perl', 'libdigest-md5-file-perl', 'liblwp-protocol-https-perl', 'liblwp-protocol-http-socketunix-perl']
     state: latest
     force: yes
   register: installation_changed

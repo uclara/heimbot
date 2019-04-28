@@ -161,6 +161,11 @@ attr SVG_{{ name }} label "{{ p.title }}"
 attr SVG_{{ name }} room Plots
 {% endfor %}
 
+# ========================
+# Netatmo
+# ========================
+#
+define Netatmo netatmo ACCOUNT {{ _fhem.netatmo.username }} {{ _fhem.netatmo.password }} {{ _fhem.netatmo.client_id }} {{ _fhem.netatmo.client_secret }}
 
 {{ _fhem.extra }}
 

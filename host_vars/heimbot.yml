@@ -312,7 +312,7 @@ FHEM:
   netatmo:
     username: "{{ S_FHEM.netatmo.username }}"
     password: "{{ S_FHEM.netatmo.password }}"
-    cliend_id: "{{ S_FHEM.netatmo.cliend_id }}"
+    client_id: "{{ S_FHEM.netatmo.cliend_id }}"
     client_secret: "{{ S_FHEM.netatmo.client_secret }}"
   extra: |+
     # ========================
