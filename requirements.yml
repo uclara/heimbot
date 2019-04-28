@@ -1,28 +1,29 @@
+- src: lukaspustina.apache
+  version: v0.1.2
+  name: apache
+
+- src: lukaspustina.haproxy
+  version: v0.1.7
+  name: haproxy
+
+- src: lukaspustina.iptables
+  version: v0.1.3
+  name: iptables
+
+- src: lukaspustina.luftpost
+  version: v0.1.2
+  name: luftpost
+
+- src: lukaspustina.motd
+  version: v0.1.1
+  name: motd
+
 - src: lukaspustina.ops_tools
-  version: v0.1.0
+  version: v0.1.2
   name: ops_tools
 
 - src: lukaspustina.unix_users
   version: v0.1.1
   name: unix_users
 
-- src: lukaspustina.apache
-  version: v0.1.0
-  name: apache
-
-- src: lukaspustina.motd
-  version: v0.1.1
-  name: motd
-
-- src: lukaspustina.haproxy
-  version: v0.1.0
-  name: haproxy
-
-- src: lukaspustina.iptables
-  version: v0.1.0
-  name: iptables
-
-- src: lukaspustina.luftpost
-  version: v0.1.1
-  name: luftpost
 

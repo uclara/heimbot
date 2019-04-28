@@ -309,6 +309,11 @@ FHEM:
           - name: FrequencySenor
             channel: 06
             rooms: [ hidden ]
+  netatmo:
+    username: "{{ S_FHEM.netatmo.username }}"
+    password: "{{ S_FHEM.netatmo.password }}"
+    cliend_id: "{{ S_FHEM.netatmo.cliend_id }}"
+    client_secret: "{{ S_FHEM.netatmo.client_secret }}"
   extra: |+
     # ========================
     # Additional Devices
@@ -473,6 +478,9 @@ HAPROXY:
       options:
         - httplog
         - httpchk
+      defaults:
+        port: 80
+        option: check cookie localhost
       servers:
         - name: localhost
           ip: localhost
@@ -483,6 +491,9 @@ HAPROXY:
       options:
         - httplog
         - httpchk
+      defaults:
+        port: 80
+        option: check cookie localhost
       servers:
         - name: localhost
           ip: localhost
