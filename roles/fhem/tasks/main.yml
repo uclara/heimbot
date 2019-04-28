@@ -1,10 +1,10 @@
 ---
 
 - name: Install CUL Flash Support
-  apt: name={{ item }} state=latest force=yes
-  with_items:
-    - make
-    - dfu-programmer
+  apt:
+    name: ['make', 'dfu-programmer']
+    state: latest
+    force: yes
   when: _fhem.firware_flash_support
 
 - name: Add Fhem APT Repository Key
@@ -14,14 +14,10 @@
   apt_repository: repo="deb https://debian.fhem.de/stable ./" state=present update_cache=yes
 
 - name: Install Fhem
-  apt: name={{ item }} state=latest force=yes
-  with_items:
-    - make
-    - dfu-programmer
-    - fhem
-    - libjson-perl
-    - sysstat
-    - libsys-statistics-linux-perl
+  apt:
+    name: ['make', 'dfu-programmer', 'fhem', 'libjson-perl', 'sysstat', 'libsys-statistics-linux-perl']
+    state: latest
+    force: yes
   register: installation_changed
 
 - name: Update Fhem
@@ -32,7 +28,7 @@
 
 - name: Stop Fhem after Installation
   service: name=fhem state=stopped
-  when: installation_changed|changed or clean_fhem_saved_state is defined and clean_fhem_saved_state
+  when: installation_changed is changed or clean_fhem_saved_state is defined and clean_fhem_saved_state
   notify:
     - Restart Fhem
 

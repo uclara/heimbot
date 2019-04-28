@@ -1,10 +1,9 @@
 ---
 
 - name: Install gcc
-  apt: pkg={{ item }} state=latest
-  with_items:
-    - build-essential
-    - libssl-dev
+  apt:
+    pkg: ['build-essential', 'libssl-dev']
+    state: latest
 
 - name: Install Avahi Developer Packages
   apt: pkg=libavahi-compat-libdnssd-dev
@@ -21,7 +20,7 @@
 
 - name: Unpack Download
   unarchive: src="/var/lib/downloads/nodejs.tgz" dest=/opt/nodejs mode=0755 owner=root group=root copy=no
-  when: download|changed
+  when: download is changed
 
 - name: Install Node.js Active Alternative
   command: update-alternatives --install "/usr/bin/{{ item }}" {{ item }} /opt/nodejs/{{ _nodejs.version }}/bin/{{ item }} 1000

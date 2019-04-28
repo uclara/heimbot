@@ -1,12 +1,9 @@
 ---
 
 - name: Install WiFi Packages
-  apt: name={{ item }} state=present
-  with_items:
-    - wpasupplicant
-    - iw
-    - crda
-    - wireless-regdb
+  apt:
+    name: ['wpasupplicant', 'iw', 'crda', 'wireless-regdb']
+    state: present
   when: _networking.use_wifi|bool|default(False)
 
 - name: Install WiFi Adapter Firmware

@@ -12,10 +12,11 @@
       when: hostname|changed
 
     - name: Install Base Packages
-      apt: name={{ item }} state=present update_cache=yes cache_valid_time=3600
-      with_items:
-        - zsh
-        - sudo
+      apt:
+        name: ['zsh', 'sudo']
+        state: present
+        update_cache: yes
+        cache_valid_time: 3600
 
     - name: Set sudo to Allow Passwordless sudo for Admin Group members
       lineinfile: "dest=/etc/sudoers state=present line='%adm ALL = NOPASSWD: ALL' insertafter='^%sudo(\\s+)ALL' validate='visudo -cf %s'"

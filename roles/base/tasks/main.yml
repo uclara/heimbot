@@ -5,8 +5,7 @@
   when: apt_update|default(False)|bool
 
 - name: Install Base Packages
-  apt: name={{ item }} state=latest force=yes
-  with_items: _base.packages
+  apt: name={{ _base.packages }} state=latest force=yes
 
 - name: Set Default Target to Multi-User
   command: systemctl set-default multi-user.target
